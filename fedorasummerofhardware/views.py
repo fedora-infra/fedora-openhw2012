@@ -119,9 +119,8 @@ def submit(request):
     groups = [role['group'] for role in roles]
     if 'cla_done' not in groups:
         return Response('You must first sign the Fedora CLA')
-    if 'cla_fpca' in groups:
-        groups.remove('cla_fpca')
-    if len(groups) < 2:
+    groups = [group for group in groups if not group.startswith('cla_')]
+    if not groups:
         return Response('You must be a member of at least one non-CLA / FPCA '
                         'Fedora Group')
     if request.params['hardware'] not in ('raspberrypi', 'arduino', 'olpc'):

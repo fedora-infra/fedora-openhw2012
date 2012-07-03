@@ -1,4 +1,7 @@
 - Authorization of admin interfaces
-- Form for accepted users to input their address
+- Admin interface improvements
+    - checkboxes for all applications. Links to randomly select, etc.
+    - Ability to approve many at once
+- Email user upon submission with link to address form
     - Email admins upon submission
 - Integrate mizmo's interface

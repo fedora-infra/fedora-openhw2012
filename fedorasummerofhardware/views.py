@@ -18,8 +18,6 @@ log = logging.getLogger(__name__)
 @view_config(route_name='login',
         renderer='fedorasummerofhardware:templates/login.mak')
 def login_view(request):
-    from pprint import pprint
-    pprint(request.environ)
     if request.POST:
         log.info('Logging into admin view as %s' % request.params['username'])
         try:

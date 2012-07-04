@@ -22,8 +22,8 @@ def login(username, password):
 @view_config(route_name='home',
         renderer='fedorasummerofhardware:templates/index.mak')
 def index(request):
-    if 'HTTP_X_FORWARDED_PROTO' in request.environ and
-      'request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
+    if 'HTTP_X_FORWARDED_PROTO' in request.environ and \
+      request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
     return {}
@@ -73,7 +73,7 @@ def approve(request):
 @view_config(route_name='accept',
         renderer='fedorasummerofhardware:templates/accept.mak')
 def accept(request):
-    if 'HTTP_X_FORWARDED_PROTO' in request.environ and
+    if 'HTTP_X_FORWARDED_PROTO' in request.environ and \
       request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/accept' %
                 request.environ['HTTP_HOST'])

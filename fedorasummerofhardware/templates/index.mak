@@ -6,10 +6,10 @@
   <meta name="keywords" content="fedora open hardware arm raspberrypi olpc arduino" />
   <meta name="description" content="Have fun with open hardware this summer! To thank the Fedora community for all that they do for free software, we are offering over 200 open hardware devices for Fedora contributors in a random drawing." />
   <link rel="shortcut icon" href="https://fedoraproject.org/static/images/favicon.ico" />
-  <script src="/static/jquery-latest.js"></script>
+  <script src="${request.static_url('fedorasummerofhardware:static/jquery-latest.js')}"></script>
 </head>
 <body>
-    <form name="application" method="POST" action="/submit" onsubmit="return doSubmit();">
+    <form name="application" method="POST" action="${request.route_url('submit')}" onsubmit="return doSubmit();">
         Full Name: <input type="text" value="" name="fullname" size=20 /><br/>
         Username: <input type="text" value="" name="username" size=20 /><br/>
         Password: <input type="password" value="" name="password" size=20 /><br/><br/>

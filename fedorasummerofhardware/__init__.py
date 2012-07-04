@@ -27,9 +27,10 @@ def main(global_config, **settings):
     config.add_route('accept', '/accept')
     config.add_route('save_address', '/save_address')
     config.include('pyramid_mailer')
-    config.add_view('fedorasummerofhardware.views.login', context=Forbidden,
-                    renderer='fedorasummerofhardware:templates/login.mak')
-    config.add_route('verify_openid', pattern='/dologin.html',
-                     view='pyramid_openid.verify_openid')
+    config.add_route('login', '/login')
+    config.add_route('logout', '/logout')
+    config.add_view('fedorasummerofhardware.views.login_view',
+                    renderer='fedorasummerofhardware:templates/login.mak',
+                    context=Forbidden)
     config.scan()
     return config.make_wsgi_app()

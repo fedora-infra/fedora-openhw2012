@@ -1,5 +1,8 @@
+import logging
+
 from pyramid.url import route_url, resource_url
 from pyramid.security import remember, authenticated_userid, forget
+from pyramid.exceptions import Forbidden
 from pyramid.httpexceptions import HTTPFound, HTTPMovedPermanently
 from pyramid.response import Response
 from pyramid.view import view_config
@@ -9,6 +12,33 @@ from pyramid_mailer.message import Message
 from sqlalchemy import func
 from fedora.client.fas2 import AccountSystem
 from .models import DBSession, Application
+
+log = logging.getLogger(__name__)
+
+@view_config(route_name='login',
+        renderer='fedorasummerofhardware:templates/login.mak')
+def login_view(request):
+    from pprint import pprint
+    pprint(request.environ)
+    if request.POST:
+        log.info('Logging into admin view as %s' % request.params['username'])
+        try:
+            roles = login(request.params['username'],
+                          request.params['password'])
+        except Exception, e:
+            log.error(str(e))
+            return {}
+        headers = remember(request, request.params['username'])
+        response = HTTPFound(request.environ['HTTP_REFERER'])
+        response.headerlist.extend(headers)
+        return response
+    return {}
+
+
+@view_config(route_name='logout')
+def logout(request):
+    headers = forget(request)
+    return HTTPFound(location=request.application_url, headers=headers)
 
 
 def login(username, password):
@@ -35,11 +65,16 @@ def csv(request):
     return {'applications': DBSession.query(Application).all()}
 
 
-@view_config(route_name='admin', permission='admin',
+@view_config(route_name='admin',
         renderer='fedorasummerofhardware:templates/submissions.mak')
 def admin(request):
-    # TODO: if we're logged in and in the admin group, good
-    # else, load the login view...
+    user = authenticated_userid(request)
+    settings = request.registry.settings
+    if not user:
+        raise Forbidden
+    if user not in settings['admin_usernames']:
+        request.session.flash('%s is not an administrator' % user)
+        raise Forbidden
     all = DBSession.query(Application).all()
     unapproved = DBSession.query(func.count(Application.hardware),
                                  Application.hardware) \

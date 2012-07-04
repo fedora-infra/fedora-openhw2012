@@ -11,7 +11,6 @@ requires = [
     'transaction',
     'pyramid_debugtoolbar',
     'waitress',
-    'pyramid_openid',
     'kitchen',
     'python-fedora',
     'bunch',

@@ -49,6 +49,17 @@ def login(username, password):
     return roles
 
 
+def authorized_admin(request):
+    user = authenticated_userid(request)
+    settings = request.registry.settings
+    if not user:
+        raise Forbidden
+    if user not in settings['admin_usernames']:
+        request.session.flash('%s is not an administrator' % user)
+        raise Forbidden
+    return user
+
+
 @view_config(route_name='home',
         renderer='fedorasummerofhardware:templates/index.mak')
 def index(request):
@@ -62,19 +73,14 @@ def index(request):
 @view_config(route_name='csv',
         renderer='fedorasummerofhardware:templates/csv.mak')
 def csv(request):
+    authorized_admin(request)
     return {'applications': DBSession.query(Application).all()}
 
 
 @view_config(route_name='admin',
         renderer='fedorasummerofhardware:templates/submissions.mak')
 def admin(request):
-    user = authenticated_userid(request)
-    settings = request.registry.settings
-    if not user:
-        raise Forbidden
-    if user not in settings['admin_usernames']:
-        request.session.flash('%s is not an administrator' % user)
-        raise Forbidden
+    authorized_admin(request)
     all = DBSession.query(Application).all()
     unapproved = DBSession.query(func.count(Application.hardware),
                                  Application.hardware) \
@@ -87,7 +93,7 @@ def admin(request):
 
 @view_config(route_name='approve', renderer='json', accept='application/json')
 def approve(request):
-    # TODO: ensure it's an authorized request
+    authorized_admin(request)
     application = DBSession.query(Application).get(int(request.params['id']))
     print("Approving application: %s" % application)
     application.approved = True

@@ -1,3 +1,6 @@
 *.pyc
 *.pyo
 *.db
+data
+sstore
+*.egg-info

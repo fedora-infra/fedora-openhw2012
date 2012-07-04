@@ -10,6 +10,7 @@
 </head>
 <body>
     <form name="application" method="POST" action="/submit" onsubmit="return doSubmit();">
+        Full Name: <input type="text" value="" name="fullname" size=20 /><br/>
         Username: <input type="text" value="" name="username" size=20 /><br/>
         Password: <input type="password" value="" name="password" size=20 /><br/><br/>
         <input type="radio" name="hardware" value="raspberrypi">Raspberry Pi<br/>

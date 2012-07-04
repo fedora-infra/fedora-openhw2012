@@ -131,6 +131,7 @@ def submit(request):
         return Response('You can only submit one application')
 
     application = Application(username=username,
+            fullname=request.params['fullname'],
             hardware=request.params['hardware'],
             text=request.params['text'])
 

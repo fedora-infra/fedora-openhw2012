@@ -9,6 +9,7 @@ Base = declarative_base()
 class Application(Base):
     __tablename__ = 'applications'
     id = Column(Integer, primary_key=True)
+    fullname = Column(Text)
     username = Column(Text, unique=True)
     hardware = Column(Text)
     date = Column(DateTime, default=datetime.now)

@@ -15,29 +15,6 @@ from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
 
-@view_config(route_name='login',
-        renderer='fedorasummerofhardware:templates/login.mak')
-def login_view(request):
-    if request.POST:
-        log.info('Logging into admin view as %s' % request.params['username'])
-        try:
-            roles = login(request.params['username'],
-                          request.params['password'])
-        except Exception, e:
-            log.error(str(e))
-            return {}
-        headers = remember(request, request.params['username'])
-        response = HTTPFound(request.environ['HTTP_REFERER'])
-        response.headerlist.extend(headers)
-        return response
-    return {}
-
-
-@view_config(route_name='logout')
-def logout(request):
-    headers = forget(request)
-    return HTTPFound(location=request.application_url, headers=headers)
-
 
 def login(username, password):
     fas = AccountSystem(username=username, password=password)
@@ -56,6 +33,29 @@ def authorized_admin(request):
         request.session.flash('%s is not an administrator' % user)
         raise Forbidden
     return user
+
+
+@view_config(route_name='login',
+        renderer='fedorasummerofhardware:templates/login.mak')
+def login_view(request):
+    if request.POST:
+        log.info('Logging into admin view as %s' % request.params['username'])
+        try:
+            login(request.params['username'], request.params['password'])
+        except Exception, e:
+            log.error(str(e))
+            return {}
+        headers = remember(request, request.params['username'])
+        response = HTTPFound(request.environ['HTTP_REFERER'])
+        response.headerlist.extend(headers)
+        return response
+    return {}
+
+
+@view_config(route_name='logout')
+def logout(request):
+    headers = forget(request)
+    return HTTPFound(location=request.application_url, headers=headers)
 
 
 @view_config(route_name='home',

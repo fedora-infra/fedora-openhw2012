@@ -1,4 +1,3 @@
-- Authorization of admin interfaces
 - Admin interface improvements
     - checkboxes for all applications. Links to randomly select, etc.
     - Ability to approve many at once

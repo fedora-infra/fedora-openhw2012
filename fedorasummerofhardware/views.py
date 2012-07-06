@@ -17,7 +17,8 @@ log = logging.getLogger(__name__)
 
 
 def login(username, password):
-    fas = AccountSystem(username=username, password=password)
+    fas = AccountSystem(username=username, password=password,
+                        cache_session=False)
     roles = fas.people_query(constraints={
         'username': username, 'group': '%', 'role_status': 'approved'},
         columns=['group'])

@@ -7,6 +7,12 @@
     </style>
 </head>
 <body>
+
+<center>
+    [ <a href="${request.route_url('csv')}">CSV</a> |
+    <a href="${request.route_url('logout')}">Logout</a> ]
+</center>
+
 Approved:
 <ul>
 % for n, hw in approved:

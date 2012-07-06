@@ -10,18 +10,16 @@ from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 
 from sqlalchemy import func
-from fedora.client.fas2 import AccountSystem
+from fedora.client import FasProxyClient
 from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
 
 
 def login(username, password):
-    fas = AccountSystem(username=username, password=password,
-                        cache_session=False)
-    roles = fas.people_query(constraints={
-        'username': username, 'group': '%', 'role_status': 'approved'},
-        columns=['group'])
+    fas = FasProxyClient()
+    user = fas.get_user_info({'username': username, 'password': password})
+    roles = [g.name for g in user[1]['approved_memberships']]
     return roles
 
 

@@ -44,6 +44,7 @@ def login_view(request):
         try:
             login(request.params['username'], request.params['password'])
         except Exception, e:
+            request.session.flash('Invalid Fedora Credentials')
             log.error(str(e))
             return {}
         headers = remember(request, request.params['username'])

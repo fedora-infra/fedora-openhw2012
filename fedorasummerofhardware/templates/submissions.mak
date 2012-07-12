@@ -30,14 +30,17 @@ Unapproved:
 <br/>
 
 % for app in applications:
-<div class="${app.approved and 'approved' or 'unapproved'}" id="app_${app.id}">${app.username},${app.hardware},${app.text}</div>
+
+<div class="${app.approved and 'approved' or 'unapproved'}" id="app_${app.id}">${app.hardware}: ${app.username} - ${app.text}</div><br/>
 
 % if not app.approved:
 <a id="approve_${app.id}" href="#" onclick="approve(${app.id})">Approve</a>
 % endif
+
 % endfor
 
 </body>
+
 <script>
 function approve(id) {
     $.ajax({

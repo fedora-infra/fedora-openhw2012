@@ -163,11 +163,10 @@ def save_address(request):
 def submit(request):
     username = request.params['username']
     try:
-        roles = login(username, request.params['password'])
+        groups = login(username, request.params['password'])
     except:
         return Response("Invalid Fedora Credentials")
 
-    groups = [role['group'] for role in roles]
     if 'cla_done' not in groups:
         return Response('You must first sign the Fedora CLA')
     groups = [group for group in groups if not group.startswith('cla_')]

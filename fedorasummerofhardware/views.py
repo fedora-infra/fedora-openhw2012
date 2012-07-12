@@ -28,7 +28,7 @@ def authorized_admin(request):
     settings = request.registry.settings
     if not user:
         raise Forbidden
-    if user not in settings['admin_usernames']:
+    if user not in settings['admin_usernames'].split():
         request.session.flash('%s is not an administrator' % user)
         raise Forbidden
     return user

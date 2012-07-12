@@ -44,8 +44,12 @@ function approve(id) {
         url: '/approve',
         data: {'id': id},
         success: function (data){
-            $('#app_' + id).addClass("approved");
-            $('#approve_' + id).remove();
+            if (data['error']) {
+                alert(data['error']);
+            } else {
+                $('#app_' + id).addClass("approved");
+                $('#approve_' + id).remove();
+            }
         }
     });
 }

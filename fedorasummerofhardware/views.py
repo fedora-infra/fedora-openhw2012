@@ -92,14 +92,24 @@ def admin(request):
 @view_config(route_name='approve', renderer='json', accept='application/json')
 def approve(request):
     authorized_admin(request)
+    settings = request.registry.settings
     application = DBSession.query(Application).get(int(request.params['id']))
-    print("Approving application: %s" % application)
+    hardware = application.hardware
+    num_hardware = int(settings['num_%s' % hardware])
+    num_approved = DBSession.query(Application).filter_by(
+            hardware=hardware, approved=True).count()
+    if num_approved >= num_hardware:
+        log.error('Unable to approve application: %s already approved for %s' %
+                (num_approved, hardware))
+        return {'error': 'There are already %s %s approved' %
+                (num_approved, hardware)}
+    log.info("Approving application: %s" % application)
     application.approved = True
     DBSession.commit()
     mailer = get_mailer(request)
     recipient = '%s@fedoraproject.org' % application.username
-    sender = request.registry.settings['from_email']
-    subject = request.registry.settings['subject']
+    sender = settings['from_email']
+    subject = settings['subject']
     # TODO: Send email with unique URL to address form
     body = """\
     """
@@ -164,7 +174,9 @@ def submit(request):
     if not groups:
         return Response('You must be a member of at least one non-CLA / FPCA '
                         'Fedora Group')
-    if request.params['hardware'] not in ('raspberrypi', 'arduino', 'olpc'):
+
+    hardware = request.registry.settings['hardware'].split()
+    if request.params['hardware'] not in hardware:
         return Response('Invalid hardware specified')
     if DBSession.query(Application).filter_by(username=username).first():
         return Response('You can only submit one application')

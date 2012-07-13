@@ -231,7 +231,7 @@
       $(document).ready(function() {
     $("input[name='password']").prop("type", "text").val("Fedora password");});
     $("input[name='password']").focus(function() {
-      if($(this).val() === "Password")
+      if($(this).val() === "Fedora password")
       {
         $(this).prop("type", "password").val("");
       }

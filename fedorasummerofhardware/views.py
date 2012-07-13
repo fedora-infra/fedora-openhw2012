@@ -8,6 +8,7 @@ from pyramid.view import view_config
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 
+from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
 from .models import DBSession, Application
@@ -172,6 +173,12 @@ def submit(request):
     except:
         return error('Invalid Fedora Credentials')
 
+    settings = request.registry.settings
+    start_date = datetime.strptime(settings['start_date'], '%Y-%m-%d')
+    creation_date = datetime.strptime(user.creation.split('.')[0].split()[0],
+                                      '%Y-%m-%d')
+    if creation_date >= start_date:
+        return error('Your account was created on or after the start date')
     if 'cla_done' not in groups:
         return error('You must first sign the Fedora CLA')
     groups = [group for group in groups if not group.startswith('cla_')]

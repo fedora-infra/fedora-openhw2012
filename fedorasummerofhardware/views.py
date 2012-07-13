@@ -142,7 +142,7 @@ def save_address(request):
 
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
-    sender = request.registry.settings['from_email']
+    sender = request.registry.settings['email_from']
     body = """\
         Username: %s
         Hardware: %s

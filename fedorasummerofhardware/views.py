@@ -184,10 +184,8 @@ def submit(request):
     groups = [group for group in groups if not group.startswith('cla_')]
     if not groups:
         return error('You must be a member of at least one '
-                     'non-CLA / FPCA Fedora Group')
-
-    hardware = request.registry.settings['hardware'].split()
-    if request.params['hardware'] not in hardware:
+                     'non-CLA/FPCA Fedora Group')
+    if request.params['hardware'] not in settings['hardware'].split():
         return error('Invalid hardware specified')
     if DBSession.query(Application).filter_by(username=username).first():
         return error('You can only submit one application')

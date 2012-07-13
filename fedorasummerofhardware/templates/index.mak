@@ -146,7 +146,7 @@ employees and contractors are not eligible to enter.</p>
         <li><p>You must be a member of at least one non-CLA / FPCA Fedora Group.</p></li>
         <li><p>You are a legal resident of a participating country.</p></li>
           </ol>
-	  <p><a id="guidelines-link" href="#guidelines" data-toggle="modal">Full contest rules and eligibility guidelines</a>.</p>
+      <p><a id="guidelines-link" href="#guidelines" data-toggle="modal">Full contest rules and eligibility guidelines</a>.</p>
         </div>
       </div>
       <div class="row">
@@ -227,7 +227,7 @@ employees and contractors are not eligible to enter.</p>
 
           <fieldset id="proposal-set">
         <legend>In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for.</legend>
-			<em>Providing this additional information is optional and not required to register for the promotion.</em>
+            <em>Providing this additional information is optional and not required to register for the promotion.</em>
         <textarea name="text" id="proposal"></textarea>
         </fieldset>
 
@@ -244,9 +244,9 @@ employees and contractors are not eligible to enter.</p>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
         Submit your entry!
           </button>
-	   </fieldset>
-	  
-	  <p id="marketing-notice"><em>You will <strong>not</strong> receive any marketing communications from Red Hat from
+       </fieldset>
+      
+      <p id="marketing-notice"><em>You will <strong>not</strong> receive any marketing communications from Red Hat from
 filling out this form. Red Hat will <strong>not</strong> share your contact information
 provided on this form with its authorized business partners.</em></p>
 
@@ -258,8 +258,8 @@ provided on this form with its authorized business partners.</em></p>
         function doSubmit(){
           var hw = $('input:radio[name=hardware]:checked').val();
           if (typeof(hw) == 'undefined') {
-          alert('You must select a type of hardware');
-          return false;
+              alert('You must select a type of hardware');
+              return false;
           }
           return true;
         }
@@ -272,13 +272,13 @@ provided on this form with its authorized business partners.</em></p>
       <hr>
 
       <footer>
-	
-	<ul>
-	  <li><a href="http://www.redhat.com/legal/privacy_statement.html">Red Hat Privacy Policy</a></li>
-	  <li><a href="https://fedoraproject.org/wiki/Legal/PrivacyPolicy">Fedora Privacy Policy</a></li>
-	</ul>
-	
-	<p>Copyright &copy; 2012 <a href="http://redhat.com">Red Hat, Inc.</a></p>
+
+    <ul>
+      <li><a href="http://www.redhat.com/legal/privacy_statement.html">Red Hat Privacy Policy</a></li>
+      <li><a href="https://fedoraproject.org/wiki/Legal/PrivacyPolicy">Fedora Privacy Policy</a></li>
+    </ul>
+
+    <p>Copyright &copy; 2012 <a href="http://redhat.com">Red Hat, Inc.</a></p>
 
       </footer>
 

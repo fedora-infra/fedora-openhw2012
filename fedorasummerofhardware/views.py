@@ -17,9 +17,9 @@ log = logging.getLogger(__name__)
 
 def login(username, password):
     fas = FasProxyClient()
-    user = fas.get_user_info({'username': username, 'password': password})
-    roles = [g.name for g in user[1]['approved_memberships']]
-    return roles
+    user = fas.get_user_info({'username': username, 'password': password})[1]
+    roles = [g.name for g in user['approved_memberships']]
+    return user, roles
 
 
 def authorized_admin(request):
@@ -168,7 +168,7 @@ def submit(request):
 
     username = request.params['username']
     try:
-        groups = login(username, request.params['password'])
+        user, groups = login(username, request.params['password'])
     except:
         return error('Invalid Fedora Credentials')
 

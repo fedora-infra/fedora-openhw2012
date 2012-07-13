@@ -1,9 +1,9 @@
 import logging
 
+from pyramid.url import route_url
 from pyramid.security import remember, authenticated_userid, forget
 from pyramid.exceptions import Forbidden
 from pyramid.httpexceptions import HTTPFound, HTTPMovedPermanently
-from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
@@ -132,11 +132,16 @@ def save_address(request):
     try:
         login(username, request.params['password'])
     except:
-        return Response("Invalid Fedora Credentials")
+        request.session.flash('Error: Invalid Fedora Credentials')
+        return HTTPFound(route_url('accept', request))
 
-    app = DBSession.query(Application).filter_by(username=username).one()
+    app = DBSession.query(Application).filter_by(username=username).first()
+    if not app:
+        request.session.flash('Error: You did not submit an application.')
+        return HTTPFound(route_url('accept', request))
     if not app.approved:
-        return Response("Sorry, your application has not been approved.")
+        request.session.flash('Error: Your application has not been approved.')
+        return HTTPFound(route_url('accept', request))
 
     app.address = request.params['address']
 

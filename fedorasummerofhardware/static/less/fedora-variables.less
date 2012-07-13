@@ -1,0 +1,528 @@
+// fedora-variables.less
+// Fedora-specific variables
+// -----------------------------------------------------
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+// Fedora Colors
+// -----------------------------
+@fedoraBlue:		#3c6eb4;
+@fedoraDarkBlue:	#294172;
+@magenta:		#db3279;
+@orange:		#e59728;
+@green:			#79db32;
+@purple:		#a07cbc;
+
+// Fedora Grays
+// -----------------------------
+@black:                 #333;
+@white:                 #fff;
+@darkGrey:              #4c4c4c;
+@grey:			#8c8c8c;
+@lightGrey:		#dedede;
+
+// Fedora Gradient Colors
+//------------------------------
+@lightBlue:		#9bbeee;
+
+// Fonts
+// ------------------------------
+@funFontFamily:       	'Chewy Regular';
+@titleFontFamily:     	'Comfortaa Regular';
+@regularFontFamily:     'Comfortaa Regular';
+
+.lightBlueGradient {
+  #gradient > .vertical-three-colors(@lightBlue, @white, 40%, @lightGrey);
+}
+
+body {
+  .lightBlueGradient;
+  background-repeat: no-repeat;
+}
+
+html {
+  background-color: @lightGrey;
+}
+
+.hero-unit {
+  background: none;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 2em;
+}
+
+.hero-unit h1 {
+  min-height: 200px;
+  background: url('../img/logo.png') no-repeat center;
+  text-indent: -9999px;
+}
+
+.hero-unit #fedora {
+  display: block;
+  width: 176px;
+  height: 51px;
+  margin-left: 40px;
+  margin-bottom: 20px;
+  background: url('../img/fedora.png') no-repeat left;
+  text-indent: -9999px;
+  float: left;
+}
+
+.hero-unit p {
+  margin-top: 20px;
+  font-family: @titleFontFamily;
+  text-align: center;
+}
+
+
+#olpc, #raspi, #arduino  { 
+  height: 280px; 
+  display: table-cell !important; 
+  vertical-align: bottom !important; 
+  .clearfix();
+}
+  
+#olpc img, 
+#raspi img, 
+#arduino img { 
+  position: relative; 
+  vertical-align: bottom !important;
+}
+
+#goodies { 
+  margin-top: -72px;
+  .clearfix();
+}
+
+#box h2 {
+  color: @magenta;
+  font-family: @funFontFamily;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 32pt;
+  padding-bottom: 1em;
+}
+
+#box {
+  font-family: @titleFontFamily;
+  font-size: 13pt;
+  line-height: 14pt;
+  color: @black;
+}
+
+#box h3 {
+  text-transform: uppercase;
+  font-size: 18pt;
+    padding-bottom: .6em;
+}
+
+#box h4 {
+  text-transform: uppercase;
+  font-size: 16pt;
+    padding-bottom: .6em;
+}
+
+#box p { text-transform: uppercase; }
+#box p strong { color: @magenta; }
+
+#box input, #box button {
+  font-size: 1.2em;
+  font-family: @titleFontFamily;
+  padding: .5em;
+}
+
+// Form color customization
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  background-color: @inputBackground;
+  border: 1px solid @inputBorder;
+  .border-radius(@inputBorderRadius);
+  .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+  @transition: border linear .2s, box-shadow linear .2s;
+  .transition(@transition);
+  
+ // Focus state
+  &:focus {
+    border-color: rgba(219,50,121,.8);
+    outline: 0;
+    outline: thin dotted \9; /* IE6-9 */
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(219,50,121,.6)");
+  }
+}
+
+
+input[type="radio"], input[type="checkbox"] {
+  margin-right: .5em;
+}
+
+label.radio, label.checkbox {
+    cursor: pointer;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 100% !important;
+    font-size: 14pt !important;
+}
+
+label.radio:hover, label.checkbox:hover {
+  background-color: rgba(255,255,143,.2);
+  box-shadow: 0 1px 8px rgba(255,255,143,.5);
+}
+
+#box ol {
+  margin-top: 10px;
+  font-family: @titleFontFamily;
+  color: @orange;
+  font-size: 20pt;
+  padding-left: 10px;
+}
+
+#box ol li { font-weight: 700 !important; }
+
+#box ol li p {
+  font-family: @regularFontFamily;
+  color: @black;
+  font-size: 12pt;
+  text-transform: none;
+  font-weight: 200;
+}
+
+ol, li, ul, p, input, textarea {
+  font-weight: 200;
+}
+
+legend {
+  text-transform: uppercase;
+  font-size: 12pt;
+  font-weight: bold;
+  border-bottom: none;
+  margin-bottom: 0px;
+}
+
+fieldset {
+  margin-bottom: 1em;
+}
+
+textarea#proposal {
+  width: 100%;
+  height: 150px;
+}
+
+label .description {
+  font-weight: 300;
+  font-size: 11pt;
+  margin-left: 1em;
+  margin-top: 1em;
+}
+
+
+
+label .description img {
+  width: 120px;
+  float: right;
+  margin-top: -55px;
+}
+
+label .description {
+  border-bottom: 1px dashed #dcdcdc;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+
+label em {
+  font-size: 10pt;
+  color: #777;
+  font-style: normal;
+}
+
+fieldset .help-block {
+  margin-top: -.7em;
+  font-size: small;
+  font-weight: 200;
+}
+
+fieldset legend {
+  line-height: 16pt;
+  margin-bottom: .5em;
+}
+
+textarea {
+  font-size: 14pt;
+  font-family: @regularFontFamily;
+  color: @black;
+}
+
+#submit-button {
+  background: @magenta;
+  font-size: 24pt;
+  font-family: @funFontFamily !important;
+  color: white;
+  text-transform: uppercase;
+  float: right;
+}
+
+#pick-shield * {
+  font-size: 12pt !important;
+  padding-top: 0px;
+  padding-bottom: 2px;
+}
+
+#pick-shield {
+  margin-top: 1.6em;
+}
+
+#pick-shield legend {
+  text-transform: none;
+  font-weight: 600;
+}
+
+#pick-shield a {
+  font-size: 10pt !important;
+  margin-left: 1em;
+}
+
+
+form .counter {
+  font-size: 10pt;
+  font-weight:bold;
+  text-transform: uppercase;
+  color: @black;
+  padding-top: 5px;
+}
+
+form .warning{ color: @orange; }	
+form .exceeded{ color:@magenta; }
+
+textarea#proposal {
+  margin-bottom: 0px;
+}
+
+.starburst {
+  position: absolute !important;
+  z-index: 120;
+  background: url('../img/starburst.png') no-repeat center;
+  height: 60px;
+  width: 60px;
+}
+
+#olpc .starburst {
+  left: 16%;
+  top: 60%;
+}
+
+#raspi .starburst {
+  top: 60%;
+  left: 40%;
+}
+
+#arduino .starburst {
+
+  top: 60%;
+  left: 64%;
+}
+
+#logo-olpc {
+  z-index: 97;
+  left: -15%;
+  line-height: 0px !important;
+}
+
+#logo-raspi {
+  z-index: 98;
+  left: 80%;
+}
+
+#raspi-photo {  top: 10%; left: 7%; }
+#arduino-photo { top: 15%; left: 9%;}
+
+#arduino h2 {
+  position: relative;
+  bottom: -48px;
+}
+
+#goodies h2 {
+  color: @black;
+  font-family: @titleFontFamily;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 14pt;
+  margin-top: -16px;
+}
+
+#goodies {
+  height: 300px;
+}
+
+.starburst {
+  color: white;
+  font-weight: bold; 
+  font-family: @titleFontFamily;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 10px;
+  line-height: 13px;
+  padding-top: 40px;
+}
+
+.starburst span {
+  font-size: 18px;
+  display: block;
+  text-align: center;
+}
+
+/* Proposal write-up is optional notice */
+#proposal-set em {
+  display: block;
+  float: right;
+  font-size: 12px;
+  color: #777;
+}
+
+/* Footer stuff */
+footer {
+  padding-bottom: 3em;
+}
+
+footer li {
+  display: block;
+  list-style-type: none !important;
+  margin-right: 1em;
+  float: left;
+  text-transform: uppercase;
+  font-size: small;
+}
+
+footer li:first-child {
+  margin-left: 0;
+}
+
+footer li:after {
+   content:    "|"; 
+   padding-left: 1em;
+}
+
+footer li:last-child:after {
+   content: "";
+}
+
+footer ul {
+  margin-left: 0px;
+}
+
+/* Font Embedding Stuff */
+
+@font-face {
+    font-family: 'Comfortaa Thin';
+    src: url('../fonts/Comfortaa_Thin-webfont.eot');
+    src: url('../fonts/Comfortaa_Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Thin-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Thin-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Thin-webfont.svg#ComfortaaThin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Comfortaa Regular';
+    src: url('../fonts/Comfortaa_Regular-webfont.eot');
+    src: url('../fonts/Comfortaa_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Regular-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Regular-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Regular-webfont.svg#ComfortaaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Comfortaa Bold';
+    src: url('../fonts/Comfortaa_Bold-webfont.eot');
+    src: url('../fonts/Comfortaa_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Bold-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Bold-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Bold-webfont.svg#ComfortaaBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'Chewy Regular';
+    src: url('../fonts/chewy-webfont.eot');
+    src: url('../fonts/chewy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/chewy-webfont.woff') format('woff'),
+         url('../fonts/chewy-webfont.ttf') format('truetype'),
+         url('../fonts/chewy-webfont.svg#ChewyRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/* Font Embedding Stuff */
+
+@font-face {
+    font-family: 'Comfortaa Thin';
+    src: url('../fonts/Comfortaa_Thin-webfont.eot');
+    src: url('../fonts/Comfortaa_Thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Thin-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Thin-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Thin-webfont.svg#ComfortaaThin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Comfortaa Regular';
+    src: url('../fonts/Comfortaa_Regular-webfont.eot');
+    src: url('../fonts/Comfortaa_Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Regular-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Regular-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Regular-webfont.svg#ComfortaaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Comfortaa Bold';
+    src: url('../fonts/Comfortaa_Bold-webfont.eot');
+    src: url('../fonts/Comfortaa_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Comfortaa_Bold-webfont.woff') format('woff'),
+         url('../fonts/Comfortaa_Bold-webfont.ttf') format('truetype'),
+         url('../fonts/Comfortaa_Bold-webfont.svg#ComfortaaBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'Chewy Regular';
+    src: url('../fonts/chewy-webfont.eot');
+    src: url('../fonts/chewy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/chewy-webfont.woff') format('woff'),
+         url('../fonts/chewy-webfont.ttf') format('truetype'),
+         url('../fonts/chewy-webfont.svg#ChewyRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

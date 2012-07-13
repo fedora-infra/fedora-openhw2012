@@ -146,9 +146,10 @@ def save_address(request):
     body = """\
         Username: %s
         Hardware: %s
+        Shield: %s
         Date Submitted: %s
         Address: %s
-    """ % (app.username, app.hardware, app.date, app.address)
+    """ % (app.username, app.hardware, app.shield, app.date, app.address)
 
     message = Message(subject="Address submitted for %s" % username,
                       sender=sender, recipients=admins, body=body)

@@ -183,6 +183,7 @@ def submit(request):
     application = Application(username=username,
             realname=request.params['realname'],
             hardware=request.params['hardware'],
+            shield=request.params.get('shield'),
             text=request.params['text'])
 
     DBSession.add(application)

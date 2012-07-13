@@ -12,6 +12,7 @@ class Application(Base):
     realname = Column(Text)
     username = Column(Text, unique=True)
     hardware = Column(Text)
+    shield = Column(Text)
     date = Column(DateTime, default=datetime.now)
     text = Column(Text)
     approved = Column(Boolean, default=False)

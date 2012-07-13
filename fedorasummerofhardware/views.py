@@ -1,6 +1,5 @@
 import logging
 
-from pyramid.url import route_url, resource_url
 from pyramid.security import remember, authenticated_userid, forget
 from pyramid.exceptions import Forbidden
 from pyramid.httpexceptions import HTTPFound, HTTPMovedPermanently
@@ -108,13 +107,11 @@ def approve(request):
     DBSession.commit()
     mailer = get_mailer(request)
     recipient = '%s@fedoraproject.org' % application.username
-    sender = settings['from_email']
-    subject = settings['subject']
-    # TODO: Send email with unique URL to address form
-    body = """\
-    """
-    message = Message(subject=subject, sender=sender,
-                      recipients=[recipient], body=body)
+    message = Message(subject=settings['email_subject'],
+                      sender=settings['email_from'],
+                      body=settings['email_body'] % (
+                          request.application_url + '/accept'),
+                      recipients=[recipient])
     mailer.send_immediately(message, fail_silently=False)
     return {}
 

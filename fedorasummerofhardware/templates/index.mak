@@ -19,7 +19,9 @@
   </head>
 
   <body>
+    
     <div class="container">
+         
 
       <% flash = '. '.join(request.session.pop_flash()) %>
       % if flash:
@@ -35,6 +37,46 @@
           </div>
         %endif
       % endif
+      
+      
+    <div class="modal hide fade" id="guidelines" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Fedora Summer of Open Hardware Sweepstakes Eligibility</h3>
+      </div>
+      <div class="modal-body">
+        <p>To be eligible to enter the 2012 Fedora Summer of Open Hardware
+Sweepstakes (the “Promotion”), Participant must be:</p>
+<ol>
+<li>a legal resident of <strongl>Australia</strongl> (excluding the states of <strong>New South Wales</strong> and <strong>the Australian
+Capital Territory</strong>), <strong>Belgium</strong>, <strong>Canada</strong> (excluding <strong>Quebec</strong>), <strong>Germany</strong>, 
+<strong>India</strong>, <strong>Japan</strong>, <strong>the Netherlands</strong>, <strong>New Zealand</strong>, <strong>Singapore</strong>, 
+<strong>South Korea</strong>, <strong>Spain</strong>, <strong>Sweden</strong>, <strong>United Kingdom</strong>, or 
+<strong>the United States</strong>;</li>
+<li>of the age of majority in his/her jurisdiction of residence at the time of entry; and</li>
+<li>an existing Fedora Contributor (“Participant”). For purposes of the
+Promotion, a “Fedora Contributor” is defined as an individual who: 
+<ul>
+  <li>has an existing Fedora Account created prior to the start of the
+Promotional Period;</li>
+  <li>has agreed to and signed the Fedora Project
+Contributor Agreement; and</li>
+  <li>is in one additional Fedora Account “group.”</li>
+  </ul>
+  </li>
+  </ol>
+  <p>Employees of Red Hat, Inc. and each of its respective
+affiliated companies, subsidiaries, advertising or promotional agencies,
+and other agents, and the immediate family members of, and any persons
+domiciled with, such employees are not eligible to enter. Government
+employees and contractors are not eligible to enter.</p>
+
+<p>For more details and full sweepstakes rules, please see: <a href="https://fedoraproject.org/openhw2012/details">https://fedoraproject.org/openhw2012/details</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+      </div>
+    </div>
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
@@ -69,7 +111,7 @@
           <form name="application" method="POST" action="${request.route_url('submit')}" onsubmit="return doSubmit();">
 
     <h2>Apply Today!</h2>
-
+    
     <div id="box-content">
       <div class="row">
         <div class="span6 offset1">
@@ -94,14 +136,16 @@
         <input value="" name="password" type="password" class="span5" placeholder="Fedora password" value="Fedora password">
         </fieldset>
       </div>
+      
         <div class="span4">
           <h4>To Qualify:</h4>
           <ol>
         <li><p>You must have a Fedora Project Account.</p></li>
         <li><p>You must have signed the Fedora Project Contributor Agreement.</p></li>
         <li><p>You must be a member of at least one non-CLA / FPCA Fedora Group.</p></li>
-        <li><p>Something about export restrictions.</p></li>
+        <li><p>You are a legal resident of a participating country.</p></li>
           </ol>
+	  <p><a id="guidelines-link" href="#guidelines" data-toggle="modal">Full contest rules and eligibility guidelines</a>.</p>
         </div>
       </div>
       <div class="row">
@@ -179,17 +223,25 @@
             </div>
           </fieldset>
 
-          <fieldset>
+
+          <fieldset id="proposal-set">
         <legend>In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for.</legend>
+			<em>Providing this additional information is optional and not required to register for the promotion.</em>
         <textarea name="text" id="proposal"></textarea>
 
-          </fieldset>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
         Submit your entry!
           </button>
-      </div>
-        </form>
+	   </fieldset>
+	  
+	  <p id="marketing-notice"><em>You will <strong>not</strong> receive any marketing communications from Red Hat from
+filling out this form. Red Hat will <strong>not</strong> share your contact information
+provided on this form with its authorized business partners.</em></p>
 
+      </div>
+      
+        </form>
+	
       <script>
         function doSubmit(){
           var hw = $('input:radio[name=hardware]:checked').val();
@@ -208,7 +260,14 @@
       <hr>
 
       <footer>
-        <p>Copyright &copy; 2012 Red Hat, Inc.</p>
+	
+	<ul>
+	  <li><a href="http://www.redhat.com/legal/privacy_statement.html">Red Hat Privacy Policy</a></li>
+	  <li><a href="https://fedoraproject.org/wiki/Legal/PrivacyPolicy">Fedora Privacy Policy</a></li>
+	</ul>
+	
+	<p>Copyright &copy; 2012 <a href="http://redhat.com">Red Hat, Inc.</a></p>
+
       </footer>
 
     </div> <!-- /container -->

@@ -1,3 +1,3 @@
 % for app in applications:
-${app.username},${app.hardware},${app.text}
+${app.date},${app.username},${app.realname},${app.country},${app.hardware},${app.shield},${app.text}
 % endfor

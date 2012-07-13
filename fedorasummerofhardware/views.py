@@ -149,12 +149,14 @@ def save_address(request):
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
     body = """\
+        Real Name: %s
         Username: %s
         Hardware: %s
         Shield: %s
         Date Submitted: %s
         Address: %s
-    """ % (app.username, app.hardware, app.shield, app.date, app.address)
+    """ % (app.realname, app.username, app.hardware, app.shield,
+           app.date, app.address)
 
     message = Message(subject="Address submitted for %s" % username,
                       sender=sender, recipients=admins, body=body)

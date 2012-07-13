@@ -1,6 +1,3 @@
 - Admin interface improvements
-    - checkboxes for all applications. Links to randomly select, etc.
-    - Ability to approve many at once
-- Email user upon submission with link to address form
-    - Email admins upon submission
-- Integrate mizmo's interface
+    - Ability to chose winners randomly
+- /details page to show winners

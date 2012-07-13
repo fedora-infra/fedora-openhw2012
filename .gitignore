@@ -4,3 +4,4 @@
 data
 sstore
 *.egg-info
+*.swp

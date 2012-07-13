@@ -194,7 +194,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>Copyright &copy; 2012 Red Hat, Inc.</p>
       </footer>
 
     </div> <!-- /container -->

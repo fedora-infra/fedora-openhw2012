@@ -155,6 +155,8 @@ def save_address(request):
                       sender=sender, recipients=admins, body=body)
     DBSession.commit()
     mailer.send_immediately(message, fail_silently=False)
+    request.session.flash('Your address has been submitted.')
+    return HTTPFound(request.application_url)
 
 
 @view_config(route_name='submit', request_method='POST')

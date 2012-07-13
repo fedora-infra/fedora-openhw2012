@@ -11,6 +11,7 @@ class Application(Base):
     id = Column(Integer, primary_key=True)
     realname = Column(Text)
     username = Column(Text, unique=True)
+    country = Column(Text)
     hardware = Column(Text)
     shield = Column(Text)
     date = Column(DateTime, default=datetime.now)

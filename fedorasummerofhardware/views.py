@@ -148,10 +148,10 @@ def save_address(request):
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
-    body = ("Real Name: %s\nUsername: %s\nHardware: %s\nShield: %s\n" + \
-           "Date Submitted: %s\nAddress: %s") % (
-                   app.realname, app.username, app.hardware, app.shield,
-                   app.date, app.address)
+    body = ("Real Name: %s\nUsername: %s\nCountry: %s\n Hardware: %s\n" +
+            "Shield: %s\nDate Submitted: %s\nAddress: %s") % (
+                   app.realname, app.username, app.country, app.hardware,
+                   app.shield, app.date, app.address)
     message = Message(subject="[Fedora Summer of Open Hardware] Address "
                               "submitted for %s" % username,
                       sender=sender, recipients=admins, body=body)
@@ -187,15 +187,18 @@ def submit(request):
                      'non-CLA/FPCA Fedora Group')
     if request.params['hardware'] not in settings['hardware'].split():
         return error('Invalid hardware specified')
+    if not request.params['country']:
+        return error('You must be a legal resident of one of the listed ' +
+                     'countries to submit an entry.')
     if DBSession.query(Application).filter_by(username=username).first():
         return error('You can only submit one application')
 
     application = Application(username=username,
             realname=request.params['realname'],
             hardware=request.params['hardware'],
-            shield=request.params.get('shield'),
+            shield=request.params.get('shield', ''),
+            country=request.params['country'],
             text=request.params['text'])
-
     DBSession.add(application)
     DBSession.commit()
 

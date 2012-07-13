@@ -135,6 +135,7 @@ employees and contractors are not eligible to enter.</p>
           <label><span style="display: none;">Fedora Password:</span></label> 
         <input value="" name="password" type="password" class="span5" placeholder="Fedora password" value="Fedora password">
         </fieldset>
+
       </div>
       
         <div class="span4">
@@ -228,7 +229,18 @@ employees and contractors are not eligible to enter.</p>
         <legend>In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for.</legend>
 			<em>Providing this additional information is optional and not required to register for the promotion.</em>
         <textarea name="text" id="proposal"></textarea>
+        </fieldset>
 
+        <fieldset id="country-set">
+        <legend>I am a legal resident of the following country / region:</legend>
+        <select class="span5" id="country-select" name="country">
+        % for country in ('', 'Australia (excluding the states of New South Wales and the Australian Capital Territory)', 'Belgium', 'Canada (excluding Quebec)', 'Germany', 'India', 'Japan', 'Netherlands', 'New Zealand', 'Singapore', 'South Korea', 'Spain', 'Sweden', 'United Kingdom', 'United States'):
+            <option>${country}</option>
+        % endfor
+        </select>
+        </fieldset>
+
+        <fieldset>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
         Submit your entry!
           </button>
@@ -241,7 +253,7 @@ provided on this form with its authorized business partners.</em></p>
       </div>
       
         </form>
-	
+    
       <script>
         function doSubmit(){
           var hw = $('input:radio[name=hardware]:checked').val();

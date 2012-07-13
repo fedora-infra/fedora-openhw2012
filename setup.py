@@ -15,6 +15,7 @@ requires = [
     'python-fedora',
     'bunch',
     'pyramid_mailer',
+    'pyramid_beaker',
     ]
 
 setup(name='FedoraSummerOfHardware',

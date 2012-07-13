@@ -147,8 +147,8 @@ def save_address(request):
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
-    body = "Real Name: %s\nUsername: %s\nHardware: %s\nShield: %s\n" + \
-           "Date Submitted: %s\nAddress: %s" % (
+    body = ("Real Name: %s\nUsername: %s\nHardware: %s\nShield: %s\n" + \
+           "Date Submitted: %s\nAddress: %s") % (
                    app.realname, app.username, app.hardware, app.shield,
                    app.date, app.address)
     message = Message(subject="[Fedora Summer of Open Hardware] Address "

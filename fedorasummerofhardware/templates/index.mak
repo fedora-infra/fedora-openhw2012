@@ -1,35 +1,273 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-  <title>Fedora Summer of Hardware</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-  <meta name="keywords" content="fedora open hardware arm raspberrypi olpc arduino" />
-  <meta name="description" content="Have fun with open hardware this summer! To thank the Fedora community for all that they do for free software, we are offering over 200 open hardware devices for Fedora contributors in a random drawing." />
-  <link rel="shortcut icon" href="https://fedoraproject.org/static/images/favicon.ico" />
-  <script src="${request.static_url('fedorasummerofhardware:static/jquery-latest.js')}"></script>
-</head>
-<body>
-    <form name="application" method="POST" action="${request.route_url('submit')}" onsubmit="return doSubmit();">
-        Full Name: <input type="text" value="" name="fullname" size=20 /><br/>
-        Username: <input type="text" value="" name="username" size=20 /><br/>
-        Password: <input type="password" value="" name="password" size=20 /><br/><br/>
-        <input type="radio" name="hardware" value="raspberrypi">Raspberry Pi<br/>
-        <input type="radio" name="hardware" value="olpc">OLPC 1.75<br/>
-        <input type="radio" name="hardware" value="arduino">Arduino<br/><br/>
-        In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for?<br/>
-        <textarea name="text" rows="4" cols="50"></textarea><br/>
-        <br/>
-        <input type="submit" value="Submit your entry!" />
-    </form>
-</body>
-<script>
-function doSubmit(){
-    var hw = $('input:radio[name=hardware]:checked').val();
-    if (typeof(hw) == 'undefined') {
-        alert('You must select a type of hardware');
-        return false;
-    }
-    return true;
-}
-</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fedora Summer of Fun</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fedora Summer of Fun: project description and application form.">
+    <meta name="author" content="The Fedora Project">
+
+    <link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://fedoraproject.org/favicon.ico" />
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <a href="http://fedoraproject.org" id="fedora">Fedora</a>
+    <h1>Summer of Open Hardware and Fun!</h1>
+
+      <div class="row" id="goodies">
+        <div class="span4" id="olpc">
+        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-olpc.png')}" id="olpc-photo">
+        <img src="${request.static_url('fedorasummerofhardware:static/img/logo-olpc.png')}" id="logo-olpc">
+      <div class="starburst"><span>50</span> units</div>
+      <h2>OLPC 1.75</h2>
+        </div>
+        <div class="span4" id="raspi">
+        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-raspi.png')}" id="raspi-photo">
+        <img src="${request.static_url('fedorasummerofhardware:static/img/logo-raspi.png')}" id="logo-raspi">
+      <div class="starburst"><span>150</span> units</div>
+          <h2>Raspberry Pi</h2>
+       </div>
+        <div class="span4" id="arduino">
+        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-arduino.png')}" id="arduino-photo">
+      <div class="starburst"><span>20</span> units</div>
+      <h2>Arduino + Shield</h2>
+        </div>
+      </div>
+
+        <p>Have fun with open hardware this summer! To thank the Fedora community for all that they do for free software, we are offering over 200 open hardware devices for Fedora contributors in a random drawing. </p>
+
+      </div>
+
+      <div id="box">
+          <form name="application" method="POST" action="${request.route_url('submit')}" onsubmit="return doSubmit();">
+
+    <h2>Apply Today!</h2>
+
+    <div id="box-content">
+      <div class="row">
+        <div class="span6 offset1">
+          <h3>Application Form</h3>
+          <p>Applications accepted until <strong>July 31, 2012</strong>.</p>
+
+
+        <fieldset>
+          <legend>Your name:</legend>
+
+          <label><span style="display: none;">Your name:</span></label>
+        <input value="" name="realname" type="text" class="span5" placeholder="Your full name" value="Your full name">
+        </fieldset>
+
+        <fieldset>
+          <legend>Your Fedora Account login information:</legend>
+
+          <label><span style="display: none;">Fedora Username:</span></label>
+        <input value="" name="username" type="text" class="span5" placeholder="Fedora username" value="Fedora username">
+
+          <label><span style="display: none;">Fedora Password:</span></label> 
+        <input value="" name="password" type="password" class="span5" placeholder="Fedora password" value="Fedora password">
+        </fieldset>
+      </div>
+        <div class="span4">
+          <h4>To Qualify:</h4>
+          <ol>
+        <li><p>You must have a Fedora Project Account.</p></li>
+        <li><p>You must have signed the Fedora Project Contributor Agreement.</p></li>
+        <li><p>You must be a member of at least one non-CLA / FPCA Fedora Group.</p></li>
+        <li><p>Something about export restrictions.</p></li>
+          </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span9 offset1">
+          <fieldset>
+        <legend>Which device are you most interested in?</legend>
+          <span class="help-block">(Only one entry per Fedora account.)</span>
+        <label class="radio" for="pick-olpc">
+          <input name="hardware" value="olpc" type="radio" id="pick-olpc">
+        OLPC <em>1.75</em>
+            <div class="description">
+            <img src="${request.static_url('fedorasummerofhardware:static/img/photo-olpc.png')}">
+              The  One Laptop Per Child (OLPC) 1.75 is an ARM-based, low-power laptop aimed at introducing children to technology and learning materials. More information is available at <a href="http://laptop.org">laptop.org</a>.
+            </div>
+        </label>
+        <label class="radio" for="pick-raspi">
+          <input name="hardware" value="raspberrypi" type="radio" id="pick-raspi">
+          Raspberry Pi <em>Model B</em>
+            <div class="description">
+            <img src="${request.static_url('fedorasummerofhardware:static/img/photo-raspi.png')}">
+              The Raspberry Pi is a tiny ARM-based computer, about the size of your palm, that can be connected to a TV and a keyboard. More information is available at <a href="http://raspberrypi.org">raspberrypi.org</a>.
+            </div>
+        </label>
+        <label class="radio" for="pick-arduino">
+          <input name="hardware" value="arduino" type="radio" id="pick-arduino">
+          Arduino <em>+ Your choice of shield</em>
+            <div class="description">
+            <img src="${request.static_url('fedorasummerofhardware:static/img/photo-arduino.png')}">
+              The Arduino is a single-board microcontroller with an open hardware design and open source compiler and boot loader, expandable with add-ons called 'shields.' More information is available at <a href="http://arduino.cc">arduino.cc</a>
+              <fieldset id="pick-shield" style="display: none;">
+            <legend>Which shield would you like included with your Arduino?</legend>
+            <label class="radio" for="pick-ethernet">
+              <input name="shield" value="ethernet" type="radio" id="pick-ethernet">
+              Ethernet Shield
+              <a href="http://www.adafruit.com/products/201">(More info)</a>
+            </label>
+            <label class="radio" for="pick-motor">
+              <input name="shield" value="motor" type="radio" id="pick-motor">
+              Motor / Servo / Stepper Shield
+              <a href="http://www.adafruit.com/products/81">(More info)</a>
+            </label>
+            <label class="radio" for="pick-game">
+              <input name="shield" value="game" type="radio" id="pick-game">
+              Video Game Shield
+              <a href="https://www.sparkfun.com/products/10226">(More info)</a>
+            </label>
+            <label class="radio" for="pick-audio">
+              <input name="shield" value="audio" type="radio" id="pick-audio">
+              Audio Shield
+              <a href="http://www.adafruit.com/products/94">(More info)</a>
+            </label>
+            <label class="radio" for="pick-lcd">
+              <input name="shield" value="lcd" type="radio" id="pick-lcd">
+              6x12 LCD Shield
+              <a href="http://www.adafruit.com/products/716">(More info)</a>
+            </label>
+            <label class="radio" for="pick-temp">
+              <input name="shield" value="temp" type="radio" id="pick-temp">
+              Light/Temperature Logger Shield
+              <a href="http://www.adafruit.com/products/249">(More info)</a>
+            </label>
+            <label class="radio" for="pick-tft">
+              <input name="shield" value="tft" type="radio" id="pick-tft">
+              18-bit TFT with Joystick Shield
+              <a href="http://www.adafruit.com/products/802">(More info)</a>
+            </label>
+            <label class="radio" for="pick-rfid">
+              <input name="shield" value="rfid" type="radio" id="pick-rfid">
+              Near-Field Communications (NFC) / RFID Shield
+              <a href="http://www.adafruit.com/products/789">(More info)</a>
+            </label>
+              </fieldset>
+              </label>
+
+            </div>
+          </fieldset>
+
+          <fieldset>
+        <legend>In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for.</legend>
+        <textarea name="text" id="proposal"></textarea>
+
+          </fieldset>
+          <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
+        Submit your entry!
+          </button>
+      </div>
+        </form>
+
+      <script>
+        function doSubmit(){
+          var hw = $('input:radio[name=hardware]:checked').val();
+          if (typeof(hw) == 'undefined') {
+          alert('You must select a type of hardware');
+          return false;
+          }
+          return true;
+        }
+      </script>
+
+    </div>
+
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/jquery-1.7.2.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-transition.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-alert.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-modal.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-dropdown.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-scrollspy.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tab.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tooltip.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-popover.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-button.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-collapse.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-carousel.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-typeahead.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/charCount.js')}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $("#proposal").charCount({ allowed: 500, warning: 20, counterText: 'Characters left: ' });
+    });
+    </script>
+
+    <script type="text/javascript">
+      // This makes the FAS 'Fedora Password' text field have a
+      // readable text label that isn't obfuscated by the password '*'s
+
+      $(document).ready(function() {
+    $("input[name='password']").prop("type", "text").val("Fedora password");});
+    $("input[name='password']").focus(function() {
+      if($(this).val() === "Password")
+      {
+        $(this).prop("type", "password").val("");
+      }
+    });
+
+    $("input[name='password']").blur(function() {
+      if(!$(this).val().length)
+      {
+        $(this).prop("type", "text").val("Fedora password");
+      }
+    });
+
+    </script>
+    <script type="text/javascript">
+      // By default, Arduino shield selections are hidden.
+      // This makes them appear when you choose the Arduino for your
+      // hardware, and hides them if you choose Raspberry Pi or OLPC.
+
+      $('#pick-arduino').click(function() {
+    $('#pick-shield').show('slow', function() {
+      //Animation complete.
+    });
+      });
+
+      $('#pick-raspi').click(function() {
+    $('#pick-shield').hide('slow', function() {
+    });
+      });
+
+      $('#pick-olpc').click(function() {
+    $('#pick-shield').hide('slow', function() {
+    });
+      });
+
+    </script>
+
+
+  </body>
 </html>

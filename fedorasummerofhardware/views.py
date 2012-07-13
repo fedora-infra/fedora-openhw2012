@@ -161,24 +161,28 @@ def save_address(request):
 
 @view_config(route_name='submit', request_method='POST')
 def submit(request):
+    def error(msg):
+        request.session.flash('Error: %s' % msg)
+        return HTTPFound(request.application_url)
+
     username = request.params['username']
     try:
         groups = login(username, request.params['password'])
     except:
-        return Response("Invalid Fedora Credentials")
+        return error('Invalid Fedora Credentials')
 
     if 'cla_done' not in groups:
-        return Response('You must first sign the Fedora CLA')
+        return error('You must first sign the Fedora CLA')
     groups = [group for group in groups if not group.startswith('cla_')]
     if not groups:
-        return Response('You must be a member of at least one non-CLA / FPCA '
-                        'Fedora Group')
+        return error('You must be a member of at least one '
+                     'non-CLA / FPCA Fedora Group')
 
     hardware = request.registry.settings['hardware'].split()
     if request.params['hardware'] not in hardware:
-        return Response('Invalid hardware specified')
+        return error('Invalid hardware specified')
     if DBSession.query(Application).filter_by(username=username).first():
-        return Response('You can only submit one application')
+        return error('You can only submit one application')
 
     application = Application(username=username,
             realname=request.params['realname'],
@@ -189,4 +193,5 @@ def submit(request):
     DBSession.add(application)
     DBSession.commit()
 
-    return Response("Your application has been submitted!")
+    request.session.flash('Your application has been submitted!')
+    return HTTPFound(request.application_url)

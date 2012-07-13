@@ -19,8 +19,22 @@
   </head>
 
   <body>
-
     <div class="container">
+
+      <% flash = '. '.join(request.session.pop_flash()) %>
+      % if flash:
+        % if flash.startswith('Error:'):
+          <div class="alert alert-error">
+            <h4 class="alert-heading">Error</h4>
+            ${flash[7:]}
+          </div>
+        % else:
+          <div class="alert alert-success">
+            <h4 class="alert-heading">Success!</h4>
+            ${flash}
+          </div>
+        %endif
+      % endif
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">

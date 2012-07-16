@@ -46,7 +46,7 @@ Unapproved:
 <script>
 function approve(id) {
     $.ajax({
-        url: '/approve',
+        url: '${request.route_url('approve')},
         data: {'id': id},
         success: function (data){
             if (data['error']) {

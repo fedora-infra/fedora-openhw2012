@@ -190,6 +190,8 @@ def submit(request):
     if not request.params['country']:
         return error('You must be a legal resident of one of the listed ' +
                      'countries to submit an entry.')
+    if user.email.split('@')[1] == settings['prohibited_users']:
+        return error('Red Hat Employees are not eligible for this contest')
     if DBSession.query(Application).filter_by(username=username).first():
         return error('You can only submit one application')
 

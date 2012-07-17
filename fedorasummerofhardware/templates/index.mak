@@ -276,6 +276,7 @@ provided on this form with its authorized business partners.</em></p>
     <ul>
       <li><a href="http://www.redhat.com/legal/privacy_statement.html">Red Hat Privacy Policy</a></li>
       <li><a href="https://fedoraproject.org/wiki/Legal/PrivacyPolicy">Fedora Privacy Policy</a></li>
+      <li><a href="http://github.com/lmacken/fedora-openhw2012">Source Code</a></li>
     </ul>
 
     <p>Copyright &copy; 2012 <a href="http://redhat.com">Red Hat, Inc.</a></p>

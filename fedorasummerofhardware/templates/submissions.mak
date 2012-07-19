@@ -5,58 +5,94 @@
     <style>
         .approved { background-color: #00FF00; }
     </style>
+    <link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://fedoraproject.org/favicon.ico" />
 </head>
 <body>
+    <div class="container">
+      <% flash = '. '.join(request.session.pop_flash()) %>
+      % if flash:
+        % if flash.startswith('Error:'):
+          <div class="alert alert-error">
+            <h4 class="alert-heading">Error</h4>
+            ${flash[7:]}
+          </div>
+        % else:
+          <div class="alert alert-success">
+            <h4 class="alert-heading">Success!</h4>
+            ${flash}
+          </div>
+        %endif
+      % endif
+  </div>
 
+      <div class="hero-unit">
+        <a href="http://fedoraproject.org" id="fedora">Fedora</a>
+        <h1>Summer of Open Hardware and Fun!</h1>
+      </div>
+
+<div class="container">
+
+<p>
 <center>
-    [ <a href="${request.route_url('csv')}">CSV</a> |
-    <a href="${request.route_url('logout')}">Logout</a> ]
+  <a href="${request.route_url('csv')}" class="btn">CSV</a>
+  <a href="${request.route_url('logout')}" class="btn">Logout</a>
 </center>
+</p>
 
-Approved:
-<ul>
-% for n, hw in approved:
-    <li>${hw}: ${n}</li>
+<table class="table table-bordered table-condensed">
+<tr>
+% for name, hw in hardware.iteritems():
+    <td>
+    <b>${name}</b>
+    <ul>
+        <li>Available: ${hw['num']}</li>
+        <li>Approved: ${hw['approved']}</li>
+        <li>Unapproved: ${hw['unapproved']}</li>
+    </ul>
+    </td>
 % endfor
-</ul>
+</tr>
+</table>
 
-Unapproved:
-<ul>
-% for n, hw in unapproved:
-    <li>${hw}: ${n}</li>
-% endfor
-</ul>
+<p><center>${len(selected)} entries randomly selected below.</center></p>
 
-<br/>
+<form name="approve" method="POST" action="${request.route_url('approve')}">
+    <center>
+          <button class="btn btn-primary" type="submit" value="Approve entries!">
+              Approve Entries
+          </button>
+    </center>
 
+<table class="table table-bordered table-striped table-condensed">
+<thead><th></th><th>Name</th><th>Hardware</th><th>Country</th><th>Text</th></thead>
 % for app in applications:
-
-<div class="${app.approved and 'approved' or 'unapproved'}" id="app_${app.id}">
-    ${app.hardware} ${app.shield}: ${app.realname} (${app.username}) - ${app.country} - ${app.text}
-</div><br/>
-
-% if not app.approved:
-<a id="approve_${app.id}" href="#" onclick="approve(${app.id})">Approve</a>
-% endif
-
+<tr>
+  <td><input type="checkbox" class="checkbox" id="${app.id}" name="${app.id}" ${app.id in selected and 'checked="checked"' or ''}"/></td>
+  <td>${app.realname} (${app.username})</td>
+  <td>${app.hardware}
+    % if app.shield:
+        (${app.shield})
+    % endif
+  </td>
+  <td>${app.country}</td>
+  <td>${app.text}</td>
+</tr>
 % endfor
+</table>
+</form>
 
+</div>
 </body>
 
-<script>
-function approve(id) {
-    $.ajax({
-        url: '${request.route_url('approve')},
-        data: {'id': id},
-        success: function (data){
-            if (data['error']) {
-                alert(data['error']);
-            } else {
-                $('#app_' + id).addClass("approved");
-                $('#approve_' + id).remove();
-            }
-        }
-    });
-}
-</script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/jquery-1.7.2.min.js')}"></script>
+
 </html>

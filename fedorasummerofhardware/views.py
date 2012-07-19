@@ -1,3 +1,4 @@
+import random
 import logging
 
 from pyramid.url import route_url
@@ -8,6 +9,7 @@ from pyramid.view import view_config
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 
+from collections import defaultdict
 from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
@@ -79,6 +81,7 @@ def csv(request):
         renderer='fedorasummerofhardware:templates/submissions.mak')
 def admin(request):
     authorized_admin(request)
+    settings = request.registry.settings
     all = DBSession.query(Application).all()
     unapproved = DBSession.query(func.count(Application.hardware),
                                  Application.hardware) \
@@ -86,7 +89,27 @@ def admin(request):
     approved = DBSession.query(func.count(Application.hardware),
                                Application.hardware) \
                 .filter_by(approved=True).group_by(Application.hardware).all()
-    return {'applications': all, 'unapproved': unapproved, 'approved': approved}
+    hardware = defaultdict(lambda: defaultdict(int))
+    selected = []
+
+    for hw in settings['hardware'].split():
+        hardware[hw]['num'] = int(settings['num_%s' % hw])
+    for num, hw in approved:
+        hardware[hw]['approved'] = num
+    for num, hw in unapproved:
+        hardware[hw]['unapproved'] = num
+        entries = DBSession.query(Application) \
+                .filter_by(hardware=hw, approved=False).all()
+        num_entries = len(entries)
+        sample_size = hardware[hw]['num'] - hardware[hw]['approved']
+        if sample_size <= 0:
+            continue
+        if sample_size > num_entries:
+            sample_size = num_entries
+        selected.extend([entry.id for entry in
+            random.sample(entries, sample_size)])
+
+    return {'hardware': hardware, 'applications': all, 'selected': selected}
 
 
 @view_config(route_name='approve', renderer='json', accept='application/json')

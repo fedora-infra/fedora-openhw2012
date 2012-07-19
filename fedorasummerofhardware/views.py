@@ -116,28 +116,37 @@ def admin(request):
 def approve(request):
     authorized_admin(request)
     settings = request.registry.settings
-    application = DBSession.query(Application).get(int(request.params['id']))
-    hardware = application.hardware
-    num_hardware = int(settings['num_%s' % hardware])
-    num_approved = DBSession.query(Application).filter_by(
-            hardware=hardware, approved=True).count()
-    if num_approved >= num_hardware:
-        log.error('Unable to approve application: %s already approved for %s' %
-                (num_approved, hardware))
-        return {'error': 'There are already %s %s approved' %
-                (num_approved, hardware)}
-    log.info("Approving application: %s" % application)
-    application.approved = True
+    approved = defaultdict(int)
+    approved.update(dict(DBSession.query(
+            Application.hardware, func.count(Application.hardware))
+            .filter_by(approved=True).group_by(Application.hardware).all()))
+    for id in request.params:
+        application = DBSession.query(Application).get(int(id))
+        hardware = application.hardware
+        num_hardware = int(settings['num_%s' % hardware])
+        num_approved = approved[hardware]
+        if num_approved >= num_hardware:
+            request.session.flash('Error: Unable to approve application: ' +
+                      '%s out of %s already approved for %s, ' % (
+                          num_approved, num_hardware, hardware))
+            return HTTPFound(route_url('admin', request))
+        if application.approved:
+            request.session.flash('Error: Application #%s already approved.' % id)
+            return HTTPFound(route_url('admin', request))
+        log.info("Approving application: %s" % application)
+        application.approved = True
+        approved[hardware] += 1
+        mailer = get_mailer(request)
+        recipient = '%s@fedoraproject.org' % application.username
+        message = Message(subject=settings['email_subject'],
+                          sender=settings['email_from'],
+                          body=settings['email_body'] % (
+                              request.application_url + '/accept'),
+                          recipients=[recipient])
+        mailer.send_immediately(message, fail_silently=False)
     DBSession.commit()
-    mailer = get_mailer(request)
-    recipient = '%s@fedoraproject.org' % application.username
-    message = Message(subject=settings['email_subject'],
-                      sender=settings['email_from'],
-                      body=settings['email_body'] % (
-                          request.application_url + '/accept'),
-                      recipients=[recipient])
-    mailer.send_immediately(message, fail_silently=False)
-    return {}
+    request.session.flash('Approved %d entries!' % len(request.params))
+    return HTTPFound(route_url('admin', request))
 
 
 @view_config(route_name='accept',

@@ -70,6 +70,13 @@ def index(request):
     return {}
 
 
+@view_config(route_name='details',
+        renderer='fedorasummerofhardware:templates/details.mak')
+def details(request):
+    # TODO: return winners
+    return {}
+
+
 @view_config(route_name='csv',
         renderer='fedorasummerofhardware:templates/csv.mak')
 def csv(request):

@@ -21,6 +21,7 @@ def main(global_config, **settings):
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('submit', '/submit')
+    config.add_route('details', '/details')
     config.add_route('admin', '/admin')
     config.add_route('csv', '/csv')
     config.add_route('approve', '/approve')

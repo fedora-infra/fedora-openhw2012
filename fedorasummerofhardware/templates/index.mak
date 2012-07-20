@@ -48,7 +48,7 @@
         <p>To be eligible to enter the 2012 Fedora Summer of Open Hardware
 Sweepstakes (the “Promotion”), Participant must be:</p>
 <ol>
-<li>a legal resident of <strongl>Australia</strongl> (excluding the states of <strong>New South Wales</strong> and <strong>the Australian
+<li>a legal resident of <strong>Australia</strong> (excluding the states of <strong>New South Wales</strong> and <strong>the Australian
 Capital Territory</strong>), <strong>Belgium</strong>, <strong>Canada</strong> (excluding <strong>Quebec</strong>), <strong>Germany</strong>, 
 <strong>India</strong>, <strong>Japan</strong>, <strong>the Netherlands</strong>, <strong>New Zealand</strong>, <strong>Singapore</strong>, 
 <strong>South Korea</strong>, <strong>Spain</strong>, <strong>Sweden</strong>, <strong>United Kingdom</strong>, or 

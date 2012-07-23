@@ -147,9 +147,11 @@ def approve(request):
         recipient = '%s@fedoraproject.org' % application.username
         message = Message(subject=settings['email_subject'],
                           sender=settings['email_from'],
+                          recipients=[recipient],
                           body=settings['email_body'] % (
-                              request.application_url + '/accept'),
-                          recipients=[recipient])
+                              route_url('accept', request),
+                              route_url('details', request),
+                              settings['est_shipping']))
         mailer.send_immediately(message, fail_silently=False)
     DBSession.commit()
     request.session.flash('Approved %d entries!' % len(request.params))

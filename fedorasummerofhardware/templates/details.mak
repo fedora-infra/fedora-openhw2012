@@ -19,9 +19,7 @@
   </head>
 
   <body>
-    
     <div class="container">
-         
 
       <% flash = '. '.join(request.session.pop_flash()) %>
       % if flash:
@@ -37,8 +35,7 @@
           </div>
         %endif
       % endif
-      
-      
+
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
         <a href="http://fedoraproject.org" id="fedora">Fedora</a>
@@ -70,7 +67,16 @@
 
       <div id="box">
 
+% if winners:
+    <h2>Winners</h2>
+    <table class="table table-bordered table-condensed">
+    % for winner in winners:
+        <tr><td>${winner.realname}</td><td>${winner.hardware}</td></tr>
+    % endfor
+    </table>
+% else:
         <h2><a href="${request.route_url('home')}">Apply Today!</a></h2>
+% endif
 
         <div id="box-content">
 

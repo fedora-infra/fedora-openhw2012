@@ -240,6 +240,20 @@ employees and contractors are not eligible to enter.</p>
         </select>
         </fieldset>
 
+        <div id="us-states" style="display:none">
+            <fieldset id="us-state-set">
+            <select class="span5" id="us-state-select" name="state">
+                <option value="">Select a State</option>
+            % for abbrev, state in states:
+                <option id="${abbrev}">${state}</option>
+            % endfor
+            </select>
+            </fieldset>
+            <div class="alert alert-info">
+                Due to the amount of money involved, residents of NY and FL may not enter this sweepstakes.
+            </div>
+        </div>
+
         <fieldset>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
         Submit your entry!
@@ -254,17 +268,6 @@ provided on this form with its authorized business partners.</em></p>
       
         </form>
     
-      <script>
-        function doSubmit(){
-          var hw = $('input:radio[name=hardware]:checked').val();
-          if (typeof(hw) == 'undefined') {
-              alert('You must select a type of hardware');
-              return false;
-          }
-          return true;
-        }
-      </script>
-
     </div>
 
       </div>
@@ -353,6 +356,27 @@ provided on this form with its authorized business partners.</em></p>
       });
 
     </script>
+
+      <script>
+        function doSubmit(){
+          var hw = $('input:radio[name=hardware]:checked').val();
+          if (typeof(hw) == 'undefined') {
+              alert('You must select a type of hardware');
+              return false;
+          }
+          return true;
+        }
+
+        $(document).ready(function(){
+            $('#country-select').change(function(ev){
+                if ($('#country-select').val() == "United States") {
+                    $('#us-states').show();
+                } else {
+                    $('#us-states').hide();
+                }
+            });
+        });
+      </script>
 
 
   </body>

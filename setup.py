@@ -16,6 +16,7 @@ requires = [
     'bunch',
     'pyramid_mailer',
     'pyramid_beaker',
+    'webhelpers',
     ]
 
 setup(name='FedoraSummerOfHardware',

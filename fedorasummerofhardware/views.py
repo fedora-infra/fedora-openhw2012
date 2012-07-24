@@ -258,6 +258,7 @@ def submit(request):
             hardware=request.params['hardware'],
             shield=request.params.get('shield', ''),
             country=request.params['country'],
+            state=request.params.get('state', ''),
             text=request.params['text'])
     DBSession.add(application)
     DBSession.commit()

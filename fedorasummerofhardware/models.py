@@ -12,6 +12,7 @@ class Application(Base):
     realname = Column(Text)
     username = Column(Text, unique=True)
     country = Column(Text)
+    state = Column(Text)
     hardware = Column(Text)
     shield = Column(Text)
     date = Column(DateTime, default=datetime.now)

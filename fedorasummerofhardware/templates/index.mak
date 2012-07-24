@@ -395,14 +395,14 @@
           <legend>Your name:</legend>
 
           <label><span style="display: none;">Your name:</span></label>
-        <input value="" name="realname" type="text" class="span5" placeholder="Your full name" value="Your full name">
+        <input name="realname" type="text" class="span5" placeholder="Your full name" value="${request.params.get('realname', '')}">
         </fieldset>
 
         <fieldset>
           <legend>Your Fedora Account login information:</legend>
 
           <label><span style="display: none;">Fedora Username:</span></label>
-        <input value="" name="username" type="text" class="span5" placeholder="Fedora username" value="Fedora username">
+        <input name="username" type="text" class="span5" placeholder="Fedora username" value="${request.params.get('username', '')}">
 
           <label><span style="display: none;">Fedora Password:</span></label> 
         <input value="" name="password" type="password" class="span5" placeholder="Fedora password" value="Fedora password">
@@ -500,7 +500,7 @@
           <fieldset id="proposal-set">
         <legend>In 500 characters or less, please tell us what fun projects you intend to use your open hardware device for.</legend>
             <em>Providing this additional information is optional and not required to register for the promotion.</em>
-        <textarea name="text" id="proposal"></textarea>
+        <textarea name="text" id="proposal">${request.params.get('text', '')}</textarea>
         </fieldset>
 
         <fieldset id="country-set">

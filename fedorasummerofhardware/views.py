@@ -154,7 +154,7 @@ def approve(request):
                           sender=settings['email_from'],
                           recipients=[recipient],
                           body=settings['email_body'] % (
-                              route_url('accept', request),
+                              '\n\n%s\n\n' % route_url('accept', request),
                               route_url('details', request),
                               settings['est_shipping']))
         mailer.send_immediately(message, fail_silently=True)
@@ -190,14 +190,20 @@ def save_address(request):
         request.session.flash('Error: Your application has not been approved.')
         return HTTPFound(route_url('accept', request))
     app.address = request.params['address']
-    app.dob = request.params['dob']
+
+    try:
+        app.dob = datetime.strptime(request.params['dob'], '%Y-%m-%d')
+    except ValueError:
+        request.session.flash('Error: Invalid Date of Birth specified. ' +
+                'Please enter it in the format YYYY-MM-DD')
+        return HTTPFound(route_url('accept', request))
 
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
     body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
-            "Date of Birth: %s\nHardware: %s\n" +
-            "Shield: %s\nDate Submitted: %s\nAddress: %s") % (
+            "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
+            "Date Submitted: %s\nAddress: %s") % (
                    app.realname, app.username, app.country, app.state,
                    app.dob, app.hardware, app.shield, app.date,
                    app.address)
@@ -214,7 +220,10 @@ def save_address(request):
 def submit(request):
     def error(msg):
         request.session.flash('Error: %s' % msg)
-        return HTTPFound(request.application_url)
+        return HTTPFound(request.route_url('home',
+                _query={'realname': request.params.get('realname', ''),
+                        'username': request.params.get('username', ''),
+                        'text': request.params.get('text', '')}))
 
     username = request.params['username']
     try:

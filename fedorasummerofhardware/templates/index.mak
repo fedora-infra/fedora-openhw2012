@@ -527,7 +527,7 @@
             </div>
         </div>
 
-        <fieldset id="age-set">
+        <fieldset id="age-set" style="display:none">
           <label class="checkbox" for="of_age">
             <input id="of_age" type="checkbox" name="of_age"/>I am at least <strong><span id="min_age">18</span></strong> years of age.
             </label>
@@ -681,6 +681,7 @@ provided on this form with its authorized business partners.</em></p>
                     $('#us-states').hide();
                     $('#min_age').text(age_of_majority[$('#country-select').val()]);
                 }
+                $('#age-set').show();
                 $('#of_age').prop('checked', false);
             });
 

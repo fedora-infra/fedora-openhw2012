@@ -71,7 +71,7 @@ and other agents, and the immediate family members of, and any persons
 domiciled with, such employees are not eligible to enter. Government
 employees and contractors are not eligible to enter.</p>
 
-<p>For more details and full sweepstakes rules, please see: <a href="https://fedoraproject.org/openhw2012/details">https://fedoraproject.org/openhw2012/details</a>.</p>
+<p>For more details and full sweepstakes rules, please see: <a href="${request.route_url('details')}">${request.route_url('details')}</a>.</p>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>

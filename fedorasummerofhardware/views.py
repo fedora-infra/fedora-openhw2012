@@ -179,7 +179,7 @@ def save_address(request):
     try:
         login(username, request.params['password'])
     except:
-        request.session.flash('Error: Invalid Fedora Credentials')
+        request.session.flash('Either your Fedora username or password was incorrect, so we couldn\'t verify your account. Double-check your username, and try typing your password again.')
         return HTTPFound(route_url('accept', request))
 
     app = DBSession.query(Application).filter_by(username=username).first()
@@ -195,8 +195,8 @@ def save_address(request):
     try:
         app.dob = datetime.strptime(request.params['dob'], '%Y-%m-%d')
     except ValueError:
-        request.session.flash('Error: Invalid Date of Birth specified. ' +
-                'Please enter it in the format YYYY-MM-DD')
+        request.session.flash('We can\'t figure out the date of birth you gave us.' +
+                'Please enter it in the format YYYY-MM-DD.')
         return HTTPFound(route_url('accept', request))
 
     mailer = get_mailer(request)
@@ -215,7 +215,7 @@ def save_address(request):
                       sender=sender, recipients=admins, body=body)
     DBSession.commit()
     mailer.send_immediately(message, fail_silently=False)
-    request.session.flash('Your address has been submitted.')
+    request.session.flash('Your address has been submitted. You should receive your hardware within six to ten weeks.')
     return HTTPFound(request.application_url)
 
 
@@ -232,16 +232,16 @@ def submit(request):
     try:
         user, groups = login(username, request.params['password'])
     except:
-        return error('Invalid Fedora Credentials')
+        return error('Either your Fedora username or password was incorrect, so we couldn\'t verify your account. Double-check your username, and try typing your password again.')
 
     settings = request.registry.settings
     start_date = datetime.strptime(settings['start_date'], '%Y-%m-%d')
     creation_date = datetime.strptime(user.creation.split('.')[0].split()[0],
                                       '%Y-%m-%d')
     if creation_date >= start_date:
-        return error('Your account was created on or after the start date')
+        return error('Your Fedora account was created after this contest started. Sorry! Only Fedora accounts created before July 25, 2012 are eligible for this contest.')
     if 'cla_done' not in groups:
-        return error('You must first sign the Fedora CLA')
+        return error('You haven\'t signed the Fedora Project Contributor Agreement. <a href="https://admin.fedoraproject.org/accounts/fpca/">Go sign it</a> and come back here to submit your application again.')
     groups = [group for group in groups if not group.startswith('cla_')]
     if not groups:
         return error('You must be a member of at least one '
@@ -260,11 +260,11 @@ def submit(request):
                                  'eligible for this contest.')
                 break
         else:
-            return error('You must select a US State')
+            return error('You forgot to select what US state you\'re in. We need to know this to determine your eligibility.')
     if request.params.get('of_age') != 'on':
-        return error('You must confirm your age')
+        return error('If you\'re not of the age of majority in your region, we can\'t accept your application. Please check off the age checkbox at the bottom of the form if you are at least the stated age.')
     if user.email.split('@')[1] == settings['prohibited_users']:
-        return error('Red Hat Employees are not eligible for this contest')
+        return error('Red Hat employees are not eligible for this contest, sorry! Didn\'t you read the rules? :) You could order a Gooseberry-Pi off of memo-list...')
 
     application = DBSession.query(Application).filter_by(username=username).first()
     if application:
@@ -284,7 +284,7 @@ def submit(request):
                 state=request.params.get('state', ''),
                 text=request.params['text'])
         DBSession.add(application)
-        request.session.flash('Your application has been submitted!')
+        request.session.flash('Your application has been submitted! We\'ll be announcing the winners the week of August 16. You\'ll hear back from us via email during that week - watch for an email from <strong>openhw2012@fedoraproject.org</strong>!')
     DBSession.commit()
 
     return HTTPFound(request.application_url)

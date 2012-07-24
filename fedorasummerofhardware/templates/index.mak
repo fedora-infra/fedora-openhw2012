@@ -28,12 +28,12 @@
         % if flash.startswith('Error:'):
           <div class="alert alert-error">
             <h4 class="alert-heading">Error</h4>
-            ${flash[7:]}
+            ${flash[7:] | n}
           </div>
         % else:
           <div class="alert alert-success">
             <h4 class="alert-heading">Success!</h4>
-            ${flash}
+            ${flash | n}
           </div>
         %endif
       % endif

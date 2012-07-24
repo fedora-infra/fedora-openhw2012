@@ -13,6 +13,7 @@ from collections import defaultdict
 from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
+from webhelpers.constants import us_states
 from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
@@ -67,14 +68,14 @@ def index(request):
       request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
-    return {}
+    return {'states': us_states()}
 
 
 @view_config(route_name='details',
         renderer='fedorasummerofhardware:templates/details.mak')
 def details(request):
-    # TODO: return winners
-    return {}
+    winners = DBSession.query(Application).filter_by(approved=True).all()
+    return {'winners': winners}
 
 
 @view_config(route_name='csv',
@@ -147,9 +148,11 @@ def approve(request):
         recipient = '%s@fedoraproject.org' % application.username
         message = Message(subject=settings['email_subject'],
                           sender=settings['email_from'],
+                          recipients=[recipient],
                           body=settings['email_body'] % (
-                              request.application_url + '/accept'),
-                          recipients=[recipient])
+                              route_url('accept', request),
+                              route_url('details', request),
+                              settings['est_shipping']))
         mailer.send_immediately(message, fail_silently=False)
     DBSession.commit()
     request.session.flash('Approved %d entries!' % len(request.params))
@@ -229,6 +232,16 @@ def submit(request):
     if not request.params['country']:
         return error('You must be a legal resident of one of the listed ' +
                      'countries to submit an entry.')
+    if request.params['country'] == 'United States':
+        excluded_states = settings['exclude_states'].split()
+        for abbrev, state in us_states():
+            if request.params['state'] == state:
+                if abbrev in excluded_states:
+                    return error('Sorry, ' + state + ' residents are not '
+                                 'eligible for this contest.')
+                break
+        else:
+            return error('You must select a US State')
     if user.email.split('@')[1] == settings['prohibited_users']:
         return error('Red Hat Employees are not eligible for this contest')
     if DBSession.query(Application).filter_by(username=username).first():

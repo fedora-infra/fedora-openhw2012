@@ -71,7 +71,7 @@ and other agents, and the immediate family members of, and any persons
 domiciled with, such employees are not eligible to enter. Government
 employees and contractors are not eligible to enter.</p>
 
-<p>For more details and full sweepstakes rules, please see: <a href="https://fedoraproject.org/openhw2012/details">https://fedoraproject.org/openhw2012/details</a>.</p>
+<p>For more details and full sweepstakes rules, please see: <a href="${request.route_url('details')}">${request.route_url('details')}</a>.</p>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
@@ -249,11 +249,26 @@ employees and contractors are not eligible to enter.</p>
         <fieldset id="country-set">
         <legend>I am a legal resident of the following country / region:</legend>
         <select class="span5" id="country-select" name="country">
-        % for country in ('', 'Australia (excluding the states of New South Wales and the Australian Capital Territory)', 'Belgium', 'Canada (excluding Quebec)', 'Germany', 'India', 'Japan', 'Netherlands', 'New Zealand', 'Singapore', 'South Korea', 'Spain', 'Sweden', 'United Kingdom', 'United States'):
+          <option value="">Select a Country</option>
+        % for country in ('Australia (excluding the states of New South Wales and the Australian Capital Territory)', 'Belgium', 'Canada (excluding Quebec)', 'Germany', 'India', 'Japan', 'Netherlands', 'New Zealand', 'Singapore', 'South Korea', 'Spain', 'Sweden', 'United Kingdom', 'United States'):
             <option>${country}</option>
         % endfor
         </select>
         </fieldset>
+
+        <div id="us-states" style="display:none">
+            <fieldset id="us-state-set">
+            <select class="span5" id="us-state-select" name="state">
+                <option value="">Select a State</option>
+            % for abbrev, state in states:
+                <option id="${abbrev}">${state}</option>
+            % endfor
+            </select>
+            </fieldset>
+            <div class="alert alert-info">
+                Due to the amount of money involved, residents of NY and FL may not enter this sweepstakes.
+            </div>
+        </div>
 
         <fieldset>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
@@ -269,17 +284,6 @@ provided on this form with its authorized business partners.</em></p>
       
         </form>
     
-      <script>
-        function doSubmit(){
-          var hw = $('input:radio[name=hardware]:checked').val();
-          if (typeof(hw) == 'undefined') {
-              alert('You must select a type of hardware');
-              return false;
-          }
-          return true;
-        }
-      </script>
-
     </div>
 
       </div>
@@ -368,6 +372,27 @@ provided on this form with its authorized business partners.</em></p>
       });
 
     </script>
+
+      <script>
+        function doSubmit(){
+          var hw = $('input:radio[name=hardware]:checked').val();
+          if (typeof(hw) == 'undefined') {
+              alert('You must select a type of hardware');
+              return false;
+          }
+          return true;
+        }
+
+        $(document).ready(function(){
+            $('#country-select').change(function(ev){
+                if ($('#country-select').val() == "United States") {
+                    $('#us-states').show();
+                } else {
+                    $('#us-states').hide();
+                }
+            });
+        });
+      </script>
 
 
   </body>

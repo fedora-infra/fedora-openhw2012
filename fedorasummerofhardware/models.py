@@ -12,12 +12,14 @@ class Application(Base):
     realname = Column(Text)
     username = Column(Text, unique=True)
     country = Column(Text)
+    state = Column(Text)
     hardware = Column(Text)
     shield = Column(Text)
     date = Column(DateTime, default=datetime.now)
     text = Column(Text)
     approved = Column(Boolean, default=False)
     address = Column(Text)
+    dob = Column(Text)
 
     def __repr__(self):
         return "<Application %s %s>" % (self.username, self.hardware)

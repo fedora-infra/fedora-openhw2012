@@ -9,14 +9,18 @@ from pyramid.view import view_config
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 
+from operator import itemgetter
 from collections import defaultdict
 from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
-from webhelpers.constants import us_states
+from webhelpers.constants import us_states, us_territories
 from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
+
+us_states_and_territories = sorted(us_states() + us_territories(),
+                                   key=itemgetter(1))
 
 
 def login(username, password):
@@ -68,7 +72,7 @@ def index(request):
       request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
-    return {'states': us_states()}
+    return {'us_states_and_territories': us_states_and_territories}
 
 
 @view_config(route_name='details',
@@ -186,14 +190,17 @@ def save_address(request):
         request.session.flash('Error: Your application has not been approved.')
         return HTTPFound(route_url('accept', request))
     app.address = request.params['address']
+    app.dob = request.params['dob']
 
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
-    body = ("Real Name: %s\nUsername: %s\nCountry: %s\n Hardware: %s\n" +
+    body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
+            "Date of Birth: %s\nHardware: %s\n" +
             "Shield: %s\nDate Submitted: %s\nAddress: %s") % (
-                   app.realname, app.username, app.country, app.hardware,
-                   app.shield, app.date, app.address)
+                   app.realname, app.username, app.country, app.state,
+                   app.dob, app.hardware, app.shield, app.date,
+                   app.address)
     message = Message(subject="[Fedora Summer of Open Hardware] Address "
                               "submitted for %s" % username,
                       sender=sender, recipients=admins, body=body)
@@ -242,6 +249,8 @@ def submit(request):
                 break
         else:
             return error('You must select a US State')
+    if request.params.get('of_age') != 'on':
+        return error('You must confirm your age')
     if user.email.split('@')[1] == settings['prohibited_users']:
         return error('Red Hat Employees are not eligible for this contest')
     if DBSession.query(Application).filter_by(username=username).first():
@@ -252,6 +261,7 @@ def submit(request):
             hardware=request.params['hardware'],
             shield=request.params.get('shield', ''),
             country=request.params['country'],
+            state=request.params.get('state', ''),
             text=request.params['text'])
     DBSession.add(application)
     DBSession.commit()

@@ -516,8 +516,8 @@
         <div id="us-states" style="display:none">
             <fieldset id="us-state-set">
             <select class="span5" id="us-state-select" name="state">
-                <option value="">Select a State</option>
-            % for abbrev, state in states:
+                <option value="">Select a State or Territory</option>
+            % for abbrev, state in us_states_and_territories:
                 <option id="${abbrev}">${state}</option>
             % endfor
             </select>
@@ -526,6 +526,12 @@
                 Due to the amount of money involved, residents of NY and FL may not enter this sweepstakes.
             </div>
         </div>
+
+        <fieldset id="age-set">
+          <label class="checkbox" for="of_age">
+            <input id="of_age" type="checkbox" name="of_age"/>I am at least <strong><span id="min_age">18</span></strong> years of age.
+            </label>
+        </fieldset>
 
         <fieldset>
           <button class="btn" id="submit-button" type="submit" value="Submit your entry!">
@@ -637,8 +643,35 @@ provided on this form with its authorized business partners.</em></p>
               alert('You must select a type of hardware');
               return false;
           }
+          if (!$('#of_age').prop('checked')) {
+              alert('You must confirm your age');
+              return false;
+          }
           return true;
         }
+
+        age_of_majority = {
+            'Australia (excluding the states of New South Wales and the Australian Capital Territory)': 18,
+            'Belgium': 18,
+            'Canada (excluding Quebec)': 18,
+            'Germany': 18,
+            'India': 18,
+            'Netherlands': 18,
+            'Spain': 18,
+            'Sweden': 18,
+            'United Kingdom': 18,
+            'South Korea': 19,
+            'Japan': 20,
+            'New Zealand': 20,
+            'Singapore': 21
+        };
+
+        us_age_of_majority = {
+            'Alabama': 19,
+            'Nebraska':  19,
+            'Mississippi': 21,
+            'Puerto Rico': 21
+        };
 
         $(document).ready(function(){
             $('#country-select').change(function(ev){
@@ -646,11 +679,22 @@ provided on this form with its authorized business partners.</em></p>
                     $('#us-states').show();
                 } else {
                     $('#us-states').hide();
+                    $('#min_age').text(age_of_majority[$('#country-select').val()]);
                 }
+                $('#of_age').prop('checked', false);
+            });
+
+            $('#us-state-select').change(function(ev){
+                var state = $('#us-state-select').val();
+                if (state in us_age_of_majority) {
+                    $('#min_age').text(us_age_of_majority[state]);
+                } else {
+                    $('#min_age').text("18");
+                }
+                $('#of_age').prop('checked', false);
             });
         });
       </script>
-
 
   </body>
 </html>

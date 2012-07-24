@@ -157,7 +157,7 @@ def approve(request):
                               route_url('accept', request),
                               route_url('details', request),
                               settings['est_shipping']))
-        mailer.send_immediately(message, fail_silently=False)
+        mailer.send_immediately(message, fail_silently=True)
     DBSession.commit()
     request.session.flash('Approved %d entries!' % len(request.params))
     return HTTPFound(route_url('admin', request))

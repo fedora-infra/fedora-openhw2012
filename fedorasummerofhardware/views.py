@@ -189,6 +189,7 @@ def save_address(request):
     if not app.approved:
         request.session.flash('Error: Your application has not been approved.')
         return HTTPFound(route_url('accept', request))
+    updated = app.address is not None
     app.address = request.params['address']
 
     try:
@@ -207,8 +208,10 @@ def save_address(request):
                    app.realname, app.username, app.country, app.state,
                    app.dob, app.hardware, app.shield, app.date,
                    app.address)
-    message = Message(subject="[Fedora Summer of Open Hardware] Address "
-                              "submitted for %s" % username,
+    prefix = "[Fedora Summer of Open Hardware]"
+    if updated:
+        prefix += "[UPDATED]"
+    message = Message(subject="%s Address submitted for %s" %(prefix,username),
                       sender=sender, recipients=admins, body=body)
     DBSession.commit()
     mailer.send_immediately(message, fail_silently=False)
@@ -262,18 +265,26 @@ def submit(request):
         return error('You must confirm your age')
     if user.email.split('@')[1] == settings['prohibited_users']:
         return error('Red Hat Employees are not eligible for this contest')
-    if DBSession.query(Application).filter_by(username=username).first():
-        return error('You can only submit one application')
 
-    application = Application(username=username,
-            realname=request.params['realname'],
-            hardware=request.params['hardware'],
-            shield=request.params.get('shield', ''),
-            country=request.params['country'],
-            state=request.params.get('state', ''),
-            text=request.params['text'])
-    DBSession.add(application)
+    application = DBSession.query(Application).filter_by(username=username).first()
+    if application:
+        application.realname = request.params['realname']
+        application.hardware = request.params['hardware']
+        application.shield = request.params.get('shield', '')
+        application.country = request.params['country']
+        application.state = request.params.get('state', '')
+        application.text = request.params['text']
+        request.session.flash('Your application has been updated!')
+    else:
+        application = Application(username=username,
+                realname=request.params['realname'],
+                hardware=request.params['hardware'],
+                shield=request.params.get('shield', ''),
+                country=request.params['country'],
+                state=request.params.get('state', ''),
+                text=request.params['text'])
+        DBSession.add(application)
+        request.session.flash('Your application has been submitted!')
     DBSession.commit()
 
-    request.session.flash('Your application has been submitted!')
     return HTTPFound(request.application_url)

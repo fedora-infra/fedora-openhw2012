@@ -234,7 +234,8 @@ employees and contractors are not eligible to enter.</p>
         <fieldset id="country-set">
         <legend>I am a legal resident of the following country / region:</legend>
         <select class="span5" id="country-select" name="country">
-        % for country in ('', 'Australia (excluding the states of New South Wales and the Australian Capital Territory)', 'Belgium', 'Canada (excluding Quebec)', 'Germany', 'India', 'Japan', 'Netherlands', 'New Zealand', 'Singapore', 'South Korea', 'Spain', 'Sweden', 'United Kingdom', 'United States'):
+          <option value="">Select a Country</option>
+        % for country in ('Australia (excluding the states of New South Wales and the Australian Capital Territory)', 'Belgium', 'Canada (excluding Quebec)', 'Germany', 'India', 'Japan', 'Netherlands', 'New Zealand', 'Singapore', 'South Korea', 'Spain', 'Sweden', 'United Kingdom', 'United States'):
             <option>${country}</option>
         % endfor
         </select>

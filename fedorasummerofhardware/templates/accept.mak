@@ -14,7 +14,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body id="accept">
+<body>
   <div class="container">
     <% flash = '. '.join(request.session.pop_flash()) %>
     % if flash:
@@ -37,52 +37,25 @@
     <h1>Summer of Open Hardware and Fun!</h1>
 
 	  </div>
-  <div id="box">
-    
-    <div id="box-content">
-      <div class="row">
-        <div class="span9 offset1">
-	  <h2>Congratulations!</h2>
-	  <p>We just need a few more details from you to ship your open hardware to you:</p>
+  <div id="box" class="span6 offset1">
     <form name="application" method="POST" action="${request.route_url('save_address')}" onsubmit="return doSubmit();">
         <fieldset>
           <legend>Your Fedora Account login information:</legend>
 
           <label><span style="display: none;">Fedora Username:</span></label>
-        <input value="" name="username" class="span5" type="text" placeholder="Fedora username" value="Fedora username">
+        <input value="" name="username" type="text" class="span5" placeholder="Fedora username" value="Fedora username">
 
           <label><span style="display: none;">Fedora Password:</span></label> 
-        <input value="" name="password" class="span5" type="password" placeholder="Fedora password" value="Fedora password">
+        <input value="" name="password" type="password" class="span5" placeholder="Fedora password" value="Fedora password">
         <label><span style="display: none;">Date of Birth:</span></label>
         <input value="" name="dob" type="text" class="span5" placeholder="Date of Birth (YYYY-MM-DD)" value="YYYY-MM-DD">
          <label><span style="display: none;">Mailing Address</span></label> 
         <textarea id="address" name="address" rows="4" class="span5" placeholder="Your Mailing Address"></textarea>
-	</fieldset>
-	<fieldset>
-	<button class="btn" id="submit-addy-button" type="submit" value="Submit your address">Submit your Address</button>
-	</fieldset>
+        </fieldset>
+        <button class="btn" id="submit-addy-button" type="submit" value="Submit your address">Submit your Address</button>
     </form>
   </div>
-  
-</div>
-</div>
-  
-      <hr>
-      
-      <footer>
-
-	<ul>
-	  <li><a href="http://www.redhat.com/legal/privacy_statement.html">Red Hat Privacy Policy</a></li>
-	  <li><a href="https://fedoraproject.org/wiki/Legal/PrivacyPolicy">Fedora Privacy Policy</a></li>
-	  <li><a href="http://github.com/lmacken/fedora-openhw2012">Source Code</a></li>
-	</ul>
-
-	<p>Copyright &copy; 2012 <a href="http://redhat.com">Red Hat, Inc.</a></p>
-
-      </footer>
-      
-</div>
-
+  </div>
 </body>
 <script>
 function doSubmit(){

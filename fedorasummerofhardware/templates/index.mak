@@ -259,8 +259,8 @@ employees and contractors are not eligible to enter.</p>
         <div id="us-states" style="display:none">
             <fieldset id="us-state-set">
             <select class="span5" id="us-state-select" name="state">
-                <option value="">Select a State</option>
-            % for abbrev, state in states:
+                <option value="">Select a State or Territory</option>
+            % for abbrev, state in us_states_and_territories:
                 <option id="${abbrev}">${state}</option>
             % endfor
             </select>

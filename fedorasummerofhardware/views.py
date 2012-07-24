@@ -9,14 +9,18 @@ from pyramid.view import view_config
 from pyramid_mailer import get_mailer
 from pyramid_mailer.message import Message
 
+from operator import itemgetter
 from collections import defaultdict
 from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
-from webhelpers.constants import us_states
+from webhelpers.constants import us_states, us_territories
 from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
+
+us_states_and_territories = sorted(us_states() + us_territories(),
+                                   key=itemgetter(1))
 
 
 def login(username, password):
@@ -68,7 +72,7 @@ def index(request):
       request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
-    return {'states': us_states()}
+    return {'us_states_and_territories': us_states_and_territories}
 
 
 @view_config(route_name='details',

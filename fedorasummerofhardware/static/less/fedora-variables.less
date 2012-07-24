@@ -502,19 +502,31 @@ body#accept button {
 
 /* details page stuff */
 
-body#details .hero-unit p,
+body#details .hero-unit p.intro,
 body#details .hero-unit ol {
-  width: 65%;
+  width: 75%;
   margin-left: auto;
   margin-right: auto;
   line-height: 18px;
+  list-style-position: inside;
 }
 
+body#details .hero-unit ul {
+  list-style-position: inside;
+}
+
+body#details .hero-unit ol > ol {
+  width: 100%;
+}
+
+
 body#details ol li,
-body#details #winner-info {
+body#details #winner-info,
+body#details .hero-unit p {
   font-family: @regularFontFamily;
   font-size: 16px;
   line-height: 18px;
+  text-align: left;
 }
 
 body#details ol>li {

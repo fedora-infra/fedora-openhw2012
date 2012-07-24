@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="http://fedoraproject.org/favicon.ico" />
   </head>
 
-  <body>
+  <body id="details">
     <div class="container">
 
       <% flash = '. '.join(request.session.pop_flash()) %>
@@ -39,67 +39,33 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
         <a href="http://fedoraproject.org" id="fedora">Fedora</a>
-    <h1>Summer of Open Hardware and Fun!</h1>
-
-      <div class="row" id="goodies">
-        <div class="span4" id="olpc">
-        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-olpc.png')}" id="olpc-photo">
-        <img src="${request.static_url('fedorasummerofhardware:static/img/logo-olpc.png')}" id="logo-olpc">
-      <div class="starburst"><span>50</span> units</div>
-      <h2>OLPC 1.75</h2>
-        </div>
-        <div class="span4" id="raspi">
-        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-raspi.png')}" id="raspi-photo">
-        <img src="${request.static_url('fedorasummerofhardware:static/img/logo-raspi.png')}" id="logo-raspi">
-      <div class="starburst"><span>150</span> units</div>
-          <h2>Raspberry Pi</h2>
-       </div>
-        <div class="span4" id="arduino">
-        <img src="${request.static_url('fedorasummerofhardware:static/img/photo-arduino.png')}" id="arduino-photo">
-      <div class="starburst"><span>20</span> units</div>
-      <h2>Arduino + Shield</h2>
-        </div>
-      </div>
-
-        <p>Have fun with open hardware this summer! To thank the Fedora community for all that they do for free software, we are offering over 200 open hardware devices for Fedora contributors in a random drawing. </p>
-
-      </div>
-
-      <div id="box">
-
-        <div id="box-content">
-
+	<h1>Summer of Open Hardware and Fun!</h1>
         <p>To be eligible to enter the 2012 Fedora Summer of Open Hardware
 Sweepstakes (the “Promotion”), Participant must be:</p>
-<ol>
-<li>a legal resident of <strong>Australia</strong> (excluding the states of <strong>New South Wales</strong> and <strong>the Australian
+	<ol>
+	  <li>a legal resident of <strong>Australia</strong> (excluding the states of <strong>New South Wales</strong> and <strong>the Australian
 Capital Territory</strong>), <strong>Belgium</strong>, <strong>Canada</strong> (excluding <strong>Quebec</strong>), <strong>Germany</strong>, 
 <strong>India</strong>, <strong>Japan</strong>, <strong>the Netherlands</strong>, <strong>New Zealand</strong>, <strong>Singapore</strong>, 
 <strong>South Korea</strong>, <strong>Spain</strong>, <strong>Sweden</strong>, <strong>United Kingdom</strong>, or 
 <strong>the United States</strong>;</li>
-<li>of the age of majority in his/her jurisdiction of residence at the time of entry; and</li>
-<li>an existing Fedora Contributor (“Participant”). For purposes of the
-Promotion, a “Fedora Contributor” is defined as an individual who: 
-<ul>
-  <li>has an existing Fedora Account created prior to the start of the
+	  <li>of the age of majority in his/her jurisdiction of residence at the time of entry; and</li>
+	  <li>an existing Fedora Contributor (“Participant”). For purposes of the Promotion, a “Fedora Contributor” is defined as an individual who: 
+	    <ul>
+		<li>has an existing Fedora Account created prior to the start of the
 Promotional Period;</li>
-  <li>has agreed to and signed the Fedora Project
+		<li>has agreed to and signed the Fedora Project
 Contributor Agreement; and</li>
-  <li>is in one additional Fedora Account “group.”</li>
-  </ul>
-  </li>
-  </ol>
-  <p>Employees of Red Hat, Inc. and each of its respective
+		<li>is in one additional Fedora Account “group.”</li>
+	    </ul>
+	  </li>
+	</ol>
+	<p>Employees of Red Hat, Inc. and each of its respective
 affiliated companies, subsidiaries, advertising or promotional agencies,
 and other agents, and the immediate family members of, and any persons
 domiciled with, such employees are not eligible to enter. Government
 employees and contractors are not eligible to enter.</p>
-
-        </div>
-
-      </div>
-
-    <h2>Winners</h2>
+	<h2>Winners</h2>
+	<div id="winner-info">
 % if winners:
     <table class="table table-bordered table-condensed">
     % for winner in winners:
@@ -109,7 +75,8 @@ employees and contractors are not eligible to enter.</p>
 % else:
     Winners will be selected on ${request.registry.settings['stop_date']}
 % endif
-
+</div>
+      </div>
       <hr>
 
       <footer>

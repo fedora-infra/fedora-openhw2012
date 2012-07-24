@@ -87,18 +87,33 @@ employees and contractors are not eligible to enter.</p>
         <div class="span4" id="olpc">
         <img src="${request.static_url('fedorasummerofhardware:static/img/photo-olpc.png')}" id="olpc-photo">
         <img src="${request.static_url('fedorasummerofhardware:static/img/logo-olpc.png')}" id="logo-olpc">
-      <div class="starburst"><span>50</span> units</div>
+      <div class="starburst">
+	<div class="burst">
+	  <span class="num">50</span> 
+	  <span>units</span>
+	</div>
+      </div>
       <h2>OLPC 1.75</h2>
         </div>
         <div class="span4" id="raspi">
         <img src="${request.static_url('fedorasummerofhardware:static/img/photo-raspi.png')}" id="raspi-photo">
         <img src="${request.static_url('fedorasummerofhardware:static/img/logo-raspi.png')}" id="logo-raspi">
-      <div class="starburst"><span>150</span> units</div>
+      <div class="starburst">
+	<div class="burst">
+	  <span class="num">150</span>
+	  <span>units</span>
+	</div>
+      </div>
           <h2>Raspberry Pi</h2>
        </div>
         <div class="span4" id="arduino">
         <img src="${request.static_url('fedorasummerofhardware:static/img/photo-arduino.png')}" id="arduino-photo">
-      <div class="starburst"><span>20</span> units</div>
+      <div class="starburst">
+	<div class="burst">
+	  <span class="num">20</span>
+	  <span>units</span>
+	</div>
+      </div>
       <h2>Arduino + Shield</h2>
         </div>
       </div>
@@ -116,7 +131,7 @@ employees and contractors are not eligible to enter.</p>
       <div class="row">
         <div class="span6 offset1">
           <h3>Application Form</h3>
-          <p>Applications accepted until <strong>July 31, 2012</strong>.</p>
+          <p>Applications accepted until <strong>August 15, 2012</strong>.</p>
 
 
         <fieldset>
@@ -144,7 +159,7 @@ employees and contractors are not eligible to enter.</p>
         <li><p>You must have a Fedora Project Account.</p></li>
         <li><p>You must have signed the Fedora Project Contributor Agreement.</p></li>
         <li><p>You must be a member of at least one non-CLA / FPCA Fedora Group.</p></li>
-        <li><p>You are a legal resident of a participating country.</p></li>
+        <li><p>You are a legal resident of a participating country/region of at least the age of majority for your region (we'll help you figure this out below.)</p></li>
           </ol>
       <p><a id="guidelines-link" href="#guidelines" data-toggle="modal">Full contest rules and eligibility guidelines</a>.</p>
         </div>

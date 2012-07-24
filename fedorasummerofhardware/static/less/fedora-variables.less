@@ -39,6 +39,7 @@
 body {
   .lightBlueGradient;
   background-repeat: no-repeat;
+  font-family: @regularFontFamily;
 }
 
 html {
@@ -322,28 +323,23 @@ textarea#proposal {
   margin-bottom: 0px;
 }
 
-.starburst {
-  position: absolute !important;
-  z-index: 120;
-  background: url('../img/starburst.png') no-repeat center;
-  height: 60px;
-  width: 60px;
-}
 
 #olpc .starburst {
-  left: 16%;
-  top: 60%;
+/*  left: 16%;
+  top: 60%; */
 }
 
 #raspi .starburst {
+/*
   top: 60%;
-  left: 40%;
+  left: 40%; */
 }
 
 #arduino .starburst {
-
+/*
   top: 60%;
   left: 64%;
+  */
 }
 
 #logo-olpc {
@@ -358,11 +354,11 @@ textarea#proposal {
 }
 
 #raspi-photo {  top: 10%; left: 7%; }
-#arduino-photo { top: 15%; left: 9%;}
-
+#arduino-photo { margin-top: 50px; left: 9%;}
 #arduino h2 {
   position: relative;
   bottom: -48px;
+  margin-top: -65px !important;
 }
 
 #goodies h2 {
@@ -387,12 +383,28 @@ textarea#proposal {
   font-size: 10px;
   line-height: 13px;
   padding-top: 40px;
+  position: relative;
+  width: 100%;
+  float: left;
+  margin-top: -50%;
 }
 
-.starburst span {
+.starburst .burst{
+ /* position: absolute !important; */
+  z-index: 120;
+  background: url('../img/starburst.png') no-repeat center;
+  height: 60px;
+  width: 60px;
+}
+
+.starburst span.num {
   font-size: 18px;
   display: block;
   text-align: center;
+}
+
+.starburst span {
+  padding-top: 18px;
 }
 
 /* Eligibility guidelines link + content */
@@ -466,6 +478,47 @@ footer p {
   padding-top: 1em !important;
 }
 
+/* details page stuff */
+
+body#details .hero-unit p,
+body#details .hero-unit ol {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 18px;
+}
+
+body#details ol li,
+body#details #winner-info {
+  font-family: @regularFontFamily;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+body#details ol>li {
+  margin-bottom: 1em;
+}
+
+body#details ol ul,
+body#details ol {
+  margin-top: 1em;
+}
+
+body#details h2 {
+  color: @magenta;
+  font-family: @funFontFamily;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 32pt;
+  margin-top: .8em;
+  padding-bottom: .5em;
+}
+
+body#details #winner-info {
+  width: 100%;
+  text-align: center;
+}
+
 /* Font Embedding Stuff */
 
 @font-face {
@@ -568,3 +621,4 @@ footer p {
     font-style: normal;
 
 }
+

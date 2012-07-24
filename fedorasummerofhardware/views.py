@@ -154,7 +154,7 @@ def approve(request):
                           sender=settings['email_from'],
                           recipients=[recipient],
                           body=settings['email_body'] % (
-                              route_url('accept', request),
+                              '\n\n%s\n\n' % route_url('accept', request),
                               route_url('details', request),
                               settings['est_shipping']))
         mailer.send_immediately(message, fail_silently=False)
@@ -196,8 +196,8 @@ def save_address(request):
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
     body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
-            "Date of Birth: %s\nHardware: %s\n" +
-            "Shield: %s\nDate Submitted: %s\nAddress: %s") % (
+            "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
+            "Date Submitted: %s\nAddress: %s") % (
                    app.realname, app.username, app.country, app.state,
                    app.dob, app.hardware, app.shield, app.date,
                    app.address)

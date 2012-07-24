@@ -131,7 +131,7 @@ employees and contractors are not eligible to enter.</p>
       <div class="row">
         <div class="span6 offset1">
           <h3>Application Form</h3>
-          <p>Applications accepted until <strong>July 31, 2012</strong>.</p>
+          <p>Applications accepted until <strong>August 15, 2012</strong>.</p>
 
 
         <fieldset>
@@ -159,7 +159,7 @@ employees and contractors are not eligible to enter.</p>
         <li><p>You must have a Fedora Project Account.</p></li>
         <li><p>You must have signed the Fedora Project Contributor Agreement.</p></li>
         <li><p>You must be a member of at least one non-CLA / FPCA Fedora Group.</p></li>
-        <li><p>You are a legal resident of a participating country.</p></li>
+        <li><p>You are a legal resident of a participating country/region of at least the age of majority for your region (we'll help you figure this out below.)</p></li>
           </ol>
       <p><a id="guidelines-link" href="#guidelines" data-toggle="modal">Full contest rules and eligibility guidelines</a>.</p>
         </div>

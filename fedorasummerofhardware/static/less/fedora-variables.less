@@ -39,6 +39,7 @@
 body {
   .lightBlueGradient;
   background-repeat: no-repeat;
+  font-family: @regularFontFamily;
 }
 
 html {
@@ -477,6 +478,47 @@ footer p {
   padding-top: 1em !important;
 }
 
+/* details page stuff */
+
+body#details .hero-unit p,
+body#details .hero-unit ol {
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 18px;
+}
+
+body#details ol li,
+body#details #winner-info {
+  font-family: @regularFontFamily;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+body#details ol>li {
+  margin-bottom: 1em;
+}
+
+body#details ol ul,
+body#details ol {
+  margin-top: 1em;
+}
+
+body#details h2 {
+  color: @magenta;
+  font-family: @funFontFamily;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 32pt;
+  margin-top: .8em;
+  padding-bottom: .5em;
+}
+
+body#details #winner-info {
+  width: 100%;
+  text-align: center;
+}
+
 /* Font Embedding Stuff */
 
 @font-face {
@@ -579,3 +621,4 @@ footer p {
     font-style: normal;
 
 }
+

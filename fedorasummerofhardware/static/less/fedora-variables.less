@@ -128,7 +128,7 @@ html {
 #box p { text-transform: uppercase; }
 #box p strong { color: @magenta; }
 
-#box input, #box button {
+#box input, #box button, #box textarea {
   font-size: 1.2em;
   font-family: @titleFontFamily;
   padding: .5em;
@@ -481,6 +481,23 @@ footer p {
   text-transform: none !important;
   clear: both;
   padding-top: 1em !important;
+}
+
+/* accept page stuff */
+
+body#accept #box-content {
+  text-align: center;
+}
+
+body#accept #box-content p {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 1.4em;
+}
+
+body#accept button {
+  float: right !important;
+  margin-right: 15%;
 }
 
 /* details page stuff */

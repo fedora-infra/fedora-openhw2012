@@ -214,7 +214,10 @@ def save_address(request):
 def submit(request):
     def error(msg):
         request.session.flash('Error: %s' % msg)
-        return HTTPFound(request.application_url)
+        return HTTPFound(request.route_url('home',
+                _query={'realname': request.params.get('realname', ''),
+                        'username': request.params.get('username', ''),
+                        'text': request.params.get('text', '')}))
 
     username = request.params['username']
     try:

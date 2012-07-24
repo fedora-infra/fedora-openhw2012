@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, DateTime, Integer, Text, Boolean
+from sqlalchemy import Column, DateTime, Integer, Text, Boolean, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
@@ -19,7 +19,7 @@ class Application(Base):
     text = Column(Text)
     approved = Column(Boolean, default=False)
     address = Column(Text)
-    dob = Column(Text)
+    dob = Column(Date)
 
     def __repr__(self):
         return "<Application %s %s>" % (self.username, self.hardware)

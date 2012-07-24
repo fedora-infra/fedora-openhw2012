@@ -190,7 +190,13 @@ def save_address(request):
         request.session.flash('Error: Your application has not been approved.')
         return HTTPFound(route_url('accept', request))
     app.address = request.params['address']
-    app.dob = request.params['dob']
+
+    try:
+        app.dob = datetime.strptime(request.params['dob'], '%Y-%m-%d')
+    except ValueError:
+        request.session.flash('Error: Invalid Date of Birth specified. ' +
+                'Please enter it in the format YYYY-MM-DD')
+        return HTTPFound(route_url('accept', request))
 
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()

@@ -242,6 +242,8 @@ def submit(request):
                 break
         else:
             return error('You must select a US State')
+    if request.params.get('of_age') != 'on':
+        return error('You must confirm your age')
     if user.email.split('@')[1] == settings['prohibited_users']:
         return error('Red Hat Employees are not eligible for this contest')
     if DBSession.query(Application).filter_by(username=username).first():

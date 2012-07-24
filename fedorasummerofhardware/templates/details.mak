@@ -67,17 +67,6 @@
 
       <div id="box">
 
-% if winners:
-    <h2>Winners</h2>
-    <table class="table table-bordered table-condensed">
-    % for winner in winners:
-        <tr><td>${winner.realname}</td><td>${winner.hardware}</td></tr>
-    % endfor
-    </table>
-% else:
-        <h2><a href="${request.route_url('home')}">Apply Today!</a></h2>
-% endif
-
         <div id="box-content">
 
         <p>To be eligible to enter the 2012 Fedora Summer of Open Hardware
@@ -109,6 +98,17 @@ employees and contractors are not eligible to enter.</p>
         </div>
 
       </div>
+
+    <h2>Winners</h2>
+% if winners:
+    <table class="table table-bordered table-condensed">
+    % for winner in winners:
+        <tr><td>${winner.realname}</td><td>${winner.hardware}</td></tr>
+    % endfor
+    </table>
+% else:
+    Winners will be selected on ${request.registry.settings['stop_date']}
+% endif
 
       <hr>
 

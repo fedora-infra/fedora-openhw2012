@@ -190,14 +190,17 @@ def save_address(request):
         request.session.flash('Error: Your application has not been approved.')
         return HTTPFound(route_url('accept', request))
     app.address = request.params['address']
+    app.dob = request.params['dob']
 
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
-    body = ("Real Name: %s\nUsername: %s\nCountry: %s\n Hardware: %s\n" +
+    body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
+            "Date of Birth: %s\nHardware: %s\n" +
             "Shield: %s\nDate Submitted: %s\nAddress: %s") % (
-                   app.realname, app.username, app.country, app.hardware,
-                   app.shield, app.date, app.address)
+                   app.realname, app.username, app.country, app.state,
+                   app.dob, app.hardware, app.shield, app.date,
+                   app.address)
     message = Message(subject="[Fedora Summer of Open Hardware] Address "
                               "submitted for %s" % username,
                       sender=sender, recipients=admins, body=body)

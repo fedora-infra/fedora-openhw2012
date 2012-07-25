@@ -284,4 +284,21 @@ def submit(request):
     application.text = request.params['text']
     DBSession.commit()
 
+    mailer = get_mailer(request)
+    subject = "Thanks for entering!"
+    body = """
+        You have successfully entered into the Fedora Summer of Open Hardware
+        2012 Contest. Drawings will be held on %s.
+
+        Your current hardware selection is: %s
+
+        If you wish to change this, you can go back to the site and resubmit an
+        application, which will update your original submission.
+
+        Good luck!
+    """ % (settings['stop_date'], application.hardware)
+    message = Message(subject=subject, sender=settings['email_from'],
+                      recipients=user.email, body=body)
+    mailer.send_immediately(message, fail_silently=False)
+
     return HTTPFound(request.application_url)

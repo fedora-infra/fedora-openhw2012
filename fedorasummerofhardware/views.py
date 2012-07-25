@@ -298,7 +298,7 @@ def submit(request):
         Good luck!
     """ % (settings['stop_date'], application.hardware)
     message = Message(subject=subject, sender=settings['email_from'],
-                      recipients=user.email, body=body)
+                      recipients=[user.email], body=body)
     mailer.send_immediately(message, fail_silently=False)
 
     return HTTPFound(request.application_url)

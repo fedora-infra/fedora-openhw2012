@@ -205,7 +205,7 @@ def save_address(request):
             "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
             "Date Submitted: %s\nAddress: %s") % (
                    app.realname, app.username, app.country, app.state,
-                   app.dob, app.hardware, app.shield, app.date,
+                   app.phone, app.hardware, app.shield, app.date,
                    app.address)
     prefix = "[Fedora Summer of Open Hardware]"
     if updated:

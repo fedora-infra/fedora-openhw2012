@@ -95,13 +95,13 @@
 
 <h2>Approved Entries</h2>
 <table class="table table-bordered table-striped table-condensed">
-<thead><th>Real Name</th><th>Username</th><th>Birth date</th><th>Hardware</th><th>Text</th><th>Country</th><th>Address</th></thead>
+<thead><th>Real Name</th><th>Username</th><th>Phone</th><th>Hardware</th><th>Text</th><th>Country</th><th>Address</th></thead>
 % for app in applications:
     % if app.approved:
         <tr>
           <td>${app.realname}</td>
           <td>${app.username}</td>
-          <td>${app.dob}</td>
+          <td>${app.phone}</td>
           <td>${app.hardware}
             % if app.shield:
                 (${app.shield})

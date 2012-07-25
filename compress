@@ -1,0 +1,15 @@
+#!/bin/bash -x
+
+STATIC=fedorasummerofhardware/static
+
+rm -f $STATIC/js/bootstrap*.min.js $STATIC/css/compressed.css
+
+# Compile our Bootstrap JavaScript with the YUI compressor
+java -jar ~/code/github.com/yuicompressor/build/yuicompressor-2.4.8pre.jar -o '.js$:.min.js' $STATIC/js/bootstrap*.js $STATIC/js/charCount.js
+
+# Compile our CSS with lessc
+~/.npm/less/1.3.0/package/bin/lessc $STATIC/less/bootstrap.less > $STATIC/css/uncompressed.css
+
+# Use the YUI compressor on our compiled less css
+java -jar ~/code/github.com/yuicompressor/build/yuicompressor-2.4.8pre.jar $STATIC/css/uncompressed.css > $STATIC/css/compressed.css
+ls -lh $STATIC/css/compressed.css

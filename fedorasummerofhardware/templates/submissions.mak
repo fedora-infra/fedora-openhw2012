@@ -5,7 +5,8 @@
     <style>
         .approved { background-color: #00FF00; }
     </style>
-    <link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    ##<link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    <link rel="stylesheet" type="text/css" href="${request.static_url('fedorasummerofhardware:static/css/compressed.css')}" media="all" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -117,7 +118,7 @@
 </div>
 </body>
 
-    <script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
+    ##<script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
     <script src="${request.static_url('fedorasummerofhardware:static/js/jquery-1.7.2.min.js')}"></script>
 
 </html>

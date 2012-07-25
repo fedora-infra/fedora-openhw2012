@@ -7,7 +7,8 @@
     <meta name="description" content="Fedora Summer of Fun: project description and application form.">
     <meta name="author" content="The Fedora Project">
 
-    <link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    ##<link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    <link rel="stylesheet" type="text/css" href="${request.static_url('fedorasummerofhardware:static/css/compressed.css')}" media="all" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -356,21 +357,20 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
+    ##<script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
     <script src="${request.static_url('fedorasummerofhardware:static/js/jquery-1.7.2.min.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-transition.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-alert.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-modal.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-dropdown.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-scrollspy.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tab.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tooltip.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-popover.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-button.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-collapse.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-carousel.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-typeahead.js')}"></script>
-    <script src="${request.static_url('fedorasummerofhardware:static/js/charCount.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-transition.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-alert.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-modal.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-dropdown.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-scrollspy.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tab.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-tooltip.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-popover.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-button.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-collapse.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-carousel.min.js')}"></script>
+    <script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-typeahead.min.js')}"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){

@@ -270,23 +270,21 @@ def submit(request):
 
     application = DBSession.query(Application).filter_by(username=username).first()
     if application:
-        application.realname = request.params['realname']
-        application.hardware = request.params['hardware']
-        application.shield = request.params.get('shield', '')
-        application.country = request.params['country']
-        application.state = request.params.get('state', '')
-        application.text = request.params['text']
         request.session.flash('Your application has been updated!')
     else:
-        application = Application(username=username,
-                realname=request.params['realname'],
-                hardware=request.params['hardware'],
-                shield=request.params.get('shield', ''),
-                country=request.params['country'],
-                state=request.params.get('state', ''),
-                text=request.params['text'])
+        application = Application(username=username)
         DBSession.add(application)
-        request.session.flash('Your application has been submitted! We\'ll be announcing the winners the week of August 16. You\'ll hear back from us via email during that week - watch for an email from <strong>openhw2012@fedoraproject.org</strong>!')
+        request.session.flash('Your application has been submitted! We\'ll be '
+                'announcing the winners the week of August 16. You\'ll hear '
+                'back from us via email during that week - watch for an '
+                'email from <strong>openhw2012@fedoraproject.org</strong>!')
+
+    application.realname = request.params['realname']
+    application.hardware = request.params['hardware']
+    application.shield = request.params.get('shield', '')
+    application.country = request.params['country']
+    application.state = request.params.get('state', '')
+    application.text = request.params['text']
     DBSession.commit()
 
     return HTTPFound(request.application_url)

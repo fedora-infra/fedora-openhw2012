@@ -253,7 +253,7 @@ def submit(request):
                      'countries to submit an entry.')
     if request.params['country'] == 'United States':
         excluded_states = settings['exclude_states'].split()
-        for abbrev, state in us_states():
+        for abbrev, state in us_states() + us_territories():
             if request.params['state'] == state:
                 if abbrev in excluded_states:
                     return error('Sorry, ' + state + ' residents are not '

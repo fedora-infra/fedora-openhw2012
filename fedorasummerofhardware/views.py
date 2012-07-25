@@ -266,8 +266,10 @@ def submit(request):
         return error('Red Hat employees are not eligible for this contest, sorry! Didn\'t you read the rules? :) You could order a Gooseberry-Pi off of memo-list...')
 
     application = DBSession.query(Application).filter_by(username=username).first()
+    updated = False
     if application:
         request.session.flash('Your application has been updated!')
+        updated = True
     else:
         application = Application(username=username)
         DBSession.add(application)
@@ -284,21 +286,22 @@ def submit(request):
     application.text = request.params['text']
     DBSession.commit()
 
-    mailer = get_mailer(request)
-    subject = "Thanks for entering!"
-    body = """
-        You have successfully entered into the Fedora Summer of Open Hardware
-        2012 Contest. Drawings will be held on %s.
+    if not updated:
+        mailer = get_mailer(request)
+        subject = "Thanks for entering!"
+        body = """
+            You have successfully entered into the Fedora Summer of Open Hardware
+            2012 Contest. Drawings will be held on %s.
 
-        Your current hardware selection is: %s
+            Your current hardware selection is: %s
 
-        If you wish to change this, you can go back to the site and resubmit an
-        application, which will update your original submission.
+            If you wish to change this, you can go back to the site and resubmit an
+            application, which will update your original submission.
 
-        Good luck!
-    """ % (settings['stop_date'], application.hardware)
-    message = Message(subject=subject, sender=settings['email_from'],
-                      recipients=[user.email], body=body)
-    mailer.send_immediately(message, fail_silently=False)
+            Good luck!
+        """ % (settings['stop_date'], application.hardware)
+        message = Message(subject=subject, sender=settings['email_from'],
+                          recipients=[user.email], body=body)
+        mailer.send_immediately(message, fail_silently=False)
 
     return HTTPFound(request.application_url)

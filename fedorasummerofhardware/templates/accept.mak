@@ -7,7 +7,8 @@
     <meta name="description" content="Fedora Summer of Fun: project description and application form.">
     <meta name="author" content="The Fedora Project">
     <link rel="shortcut icon" href="https://fedoraproject.org/static/images/favicon.ico" />
-    <link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    ##<link rel="stylesheet/less" href="${request.static_url('fedorasummerofhardware:static/less/bootstrap.less')}">
+    <link rel="stylesheet" type="text/css" href="${request.static_url('fedorasummerofhardware:static/css/compressed.css')}" media="all" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -93,8 +94,8 @@ function doSubmit(){
     return true;
 }
 </script>
-<script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
+##<script src="${request.static_url('fedorasummerofhardware:static/js/less-1.3.0.min.js')}"></script>
 <script src="${request.static_url('fedorasummerofhardware:static/js/jquery-1.7.2.min.js')}"></script>
-<script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-alert.js')}"></script>
-<script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-button.js')}"></script>
+<script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-alert.min.js')}"></script>
+<script src="${request.static_url('fedorasummerofhardware:static/js/bootstrap-button.min.js')}"></script>
 </html>

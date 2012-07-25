@@ -518,7 +518,9 @@
             <select class="span5" id="us-state-select" name="state">
                 <option value="">Select a State or Territory</option>
             % for abbrev, state in us_states_and_territories:
-                <option id="${abbrev}">${state}</option>
+                % if abbrev not in excluded_states:
+                    <option id="${abbrev}">${state}</option>
+                % endif
             % endfor
             </select>
             </fieldset>

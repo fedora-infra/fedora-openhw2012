@@ -72,7 +72,9 @@ def index(request):
       request.environ['HTTP_X_FORWARDED_PROTO'] != 'https':
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
-    return {'us_states_and_territories': us_states_and_territories}
+    excluded_states = request.registry.settings['exclude_states'].split()
+    return {'us_states_and_territories': us_states_and_territories,
+            'excluded_states': excluded_states}
 
 
 @view_config(route_name='details',

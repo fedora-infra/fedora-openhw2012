@@ -647,10 +647,6 @@ provided on this form with its authorized business partners.</em></p>
               alert('You must select a type of hardware');
               return false;
           }
-          if (!$('#of_age').prop('checked')) {
-              alert('You must confirm your age');
-              return false;
-          }
           return true;
         }
 

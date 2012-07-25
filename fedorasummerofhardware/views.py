@@ -277,7 +277,7 @@ def submit(request):
         request.session.flash('Your application has been submitted! We\'ll be '
                 'announcing the winners the week of August 16. You\'ll hear '
                 'back from us via email during that week - watch for an '
-                'email from <strong>openhw2012@fedoraproject.org</strong>!')
+                'email from <strong>%s</strong>!' % settings['admin_email'])
 
     application.realname = request.params['realname']
     application.hardware = request.params['hardware']

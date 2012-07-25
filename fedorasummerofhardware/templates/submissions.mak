@@ -71,23 +71,48 @@
           </button>
     </center>
 
+<h2>Unapproved Entries</h2>
 <table class="table table-bordered table-striped table-condensed">
 <thead><th></th><th>Name</th><th>Hardware</th><th>Country</th><th>Text</th></thead>
 % for app in applications:
-<tr>
-  <td><input type="checkbox" class="checkbox" id="${app.id}" name="${app.id}" ${app.id in selected and 'checked="checked"' or ''}"/></td>
-  <td>${app.realname} (${app.username})</td>
-  <td>${app.hardware}
-    % if app.shield:
-        (${app.shield})
+    % if not app.approved:
+        <tr>
+          <td><input type="checkbox" class="checkbox" id="${app.id}" name="${app.id}" ${app.id in selected and 'checked="checked"' or ''}"/></td>
+          <td>${app.realname} (${app.username})</td>
+          <td>${app.hardware}
+            % if app.shield:
+                (${app.shield})
+            % endif
+          </td>
+          <td>${app.country}</td>
+          <td>${app.text}</td>
+        </tr>
     % endif
-  </td>
-  <td>${app.country}</td>
-  <td>${app.text}</td>
-</tr>
 % endfor
 </table>
 </form>
+
+<h2>Approved Entries</h2>
+<table class="table table-bordered table-striped table-condensed">
+<thead><th>Real Name</th><th>Username</th><th>Birth date</th><th>Hardware</th><th>Text</th><th>Country</th><th>Address</th></thead>
+% for app in applications:
+    % if app.approved:
+        <tr>
+          <td>${app.realname}</td>
+          <td>${app.username}</td>
+          <td>${app.dob}</td>
+          <td>${app.hardware}
+            % if app.shield:
+                (${app.shield})
+            % endif
+          </td>
+          <td>${app.text}</td>
+          <td>${app.country}</td>
+          <td>${app.address}</td>
+        </tr>
+    % endif
+% endfor
+</table>
 
 </div>
 </body>

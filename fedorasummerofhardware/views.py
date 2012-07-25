@@ -193,12 +193,9 @@ def save_address(request):
         return HTTPFound(route_url('accept', request))
     updated = app.address is not None
     app.address = request.params['address']
-
-    try:
-        app.dob = datetime.strptime(request.params['dob'], '%Y-%m-%d')
-    except ValueError:
-        request.session.flash('We can\'t figure out the date of birth you gave us.' +
-                'Please enter it in the format YYYY-MM-DD.')
+    app.phone = request.params['phone']
+    if not app.phone:
+        request.session.flash('Error: You must enter your phone number.')
         return HTTPFound(route_url('accept', request))
 
     mailer = get_mailer(request)

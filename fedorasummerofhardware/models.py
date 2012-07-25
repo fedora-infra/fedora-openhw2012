@@ -19,7 +19,7 @@ class Application(Base):
     text = Column(Text)
     approved = Column(Boolean, default=False)
     address = Column(Text)
-    dob = Column(Date)
+    phone = Column(Date)
 
     def __repr__(self):
         return "<Application %s %s>" % (self.username, self.hardware)

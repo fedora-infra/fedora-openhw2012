@@ -54,8 +54,8 @@
 
           <label><span style="display: none;">Fedora Password:</span></label> 
         <input value="" name="password" class="span5" type="password" placeholder="Fedora password" value="Fedora password">
-        <label><span style="display: none;">Date of Birth:</span></label>
-        <input value="" name="dob" type="text" class="span5" placeholder="Date of Birth (YYYY-MM-DD)" value="YYYY-MM-DD">
+        <label><span style="display: none;">Phone:</span></label>
+        <input name="phone" type="text" class="span5" placeholder="Phone Number" value="">
          <label><span style="display: none;">Mailing Address</span></label> 
         <textarea id="address" name="address" rows="4" class="span5" placeholder="Your Mailing Address"></textarea>
 	</fieldset>

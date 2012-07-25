@@ -18,6 +18,8 @@
     <link rel="shortcut icon" href="http://fedoraproject.org/favicon.ico" />
   </head>
 
+  <noscript><strong>You need to enable JavaScript for this page to work properly</strong></noscript>
+
   <body>
     
     <div class="container">

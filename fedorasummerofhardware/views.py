@@ -53,7 +53,7 @@ def login_view(request):
             log.error(str(e))
             return {}
         headers = remember(request, request.params['username'])
-        response = HTTPFound(request.environ['HTTP_REFERER'])
+        response = HTTPFound(route_url('admin', request))
         response.headerlist.extend(headers)
         return response
     return {}

@@ -190,7 +190,7 @@
 	  receive one Arduino Uno R3 (Atmega328—assembled) with 
 	  matching “shield” (“Third Drawing Prize”) with an ARV of $85 
 	  USD. The maximum total ARV of all prizes awarded is [total of
-	  all prizes in currency – must be less than $5000.00 USD]; 
+	  all prizes in currency – must be less than $24150.00 USD]; 
 	  however, the total ARV may be less if all Prizes are not 
 	  awarded. If fewer than 50 Entries are received for the First
 	  Drawing, then fewer than 50 First Drawing Prizes will be 

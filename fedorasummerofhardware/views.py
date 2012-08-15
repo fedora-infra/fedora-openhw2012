@@ -244,6 +244,8 @@ def submit(request):
                 _query={'realname': request.params.get('realname', ''),
                         'username': request.params.get('username', ''),
                         'text': request.params.get('text', '')}))
+    if not asbool(request.registry.settings['accept_applications']):
+        return error('Applications are no longer accepted')
 
     username = request.params['username']
     try:

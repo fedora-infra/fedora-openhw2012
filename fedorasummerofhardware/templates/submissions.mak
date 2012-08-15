@@ -82,14 +82,14 @@
     % if not app.approved:
         <tr>
           <td><input type="checkbox" class="checkbox" id="${app.id}" name="${app.id}" ${app.id in selected and 'checked="checked"' or ''}"/></td>
-          <td>${app.realname} (${app.username})</td>
+          <td>${app.realname.decode('utf-8')} (${app.username})</td>
           <td>${app.hardware}
             % if app.shield:
                 (${app.shield})
             % endif
           </td>
           <td>${app.country}</td>
-          <td>${app.text}</td>
+          <td>${app.text.decode('utf-8')}</td>
         </tr>
     % endif
 % endfor
@@ -102,7 +102,7 @@
 % for app in applications:
     % if app.approved:
         <tr>
-          <td>${app.realname}</td>
+          <td>${app.realname.decode('utf-8')}</td>
           <td>${app.username}</td>
           <td>${app.phone}</td>
           <td>${app.hardware}
@@ -110,7 +110,7 @@
                 (${app.shield})
             % endif
           </td>
-          <td>${app.text}</td>
+          <td>${app.text.decode('utf-8')}</td>
           <td>${app.country}</td>
           <td>${app.address}</td>
         </tr>

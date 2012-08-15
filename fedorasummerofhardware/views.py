@@ -198,7 +198,8 @@ def save_address(request):
     username = request.params['username']
     try:
         login(username, request.params['password'])
-    except:
+    except Exception, e:
+        log.warn(str(e))
         request.session.flash('Either your Fedora username or password was incorrect, so we couldn\'t verify your account. Double-check your username, and try typing your password again.')
         return HTTPFound(route_url('accept', request))
 

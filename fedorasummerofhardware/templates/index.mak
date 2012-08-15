@@ -382,6 +382,7 @@
       </div>
 
       <div id="box">
+% if accept_applications:
           <form name="application" method="POST" action="${request.route_url('submit')}" onsubmit="return doSubmit();">
 
     <h2>Apply Today!</h2>
@@ -550,7 +551,10 @@ provided on this form with its authorized business partners.</em></p>
       </div>
       
         </form>
-    
+% else:
+	<h2>Submissions are no longer accepted</h2>
+	<center><b>Winners will be selected on ${request.registry.settings['stop_date']} and can be found here: <br/><br/><a href="https://fedoraproject.org/openhw2012/details">https://fedoraproject.org/openhw2012/details</a></b></center>
+% endif
     </div>
 
       </div>

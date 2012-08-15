@@ -30,6 +30,7 @@ from datetime import datetime
 from sqlalchemy import func
 from fedora.client import FasProxyClient
 from webhelpers.constants import us_states, us_territories
+from paste.deploy.converters import asbool
 from .models import DBSession, Application
 
 log = logging.getLogger(__name__)
@@ -88,8 +89,10 @@ def index(request):
         return HTTPMovedPermanently(location='https://%s/' %
                 request.environ['HTTP_HOST'])
     excluded_states = request.registry.settings['exclude_states'].split()
+    accept_applications = asbool(request.registry.settings['accept_applications'])
     return {'us_states_and_territories': us_states_and_territories,
-            'excluded_states': excluded_states}
+            'excluded_states': excluded_states,
+            'accept_applications': accept_applications}
 
 
 @view_config(route_name='details',

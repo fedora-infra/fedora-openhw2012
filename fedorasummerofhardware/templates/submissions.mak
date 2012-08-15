@@ -65,12 +65,14 @@
 
 <p><center>${len(selected)} entries randomly selected below.</center></p>
 
+% if now >= stop_date:
 <form name="approve" method="POST" action="${request.route_url('approve')}">
     <center>
           <button class="btn btn-primary" type="submit" value="Approve entries!">
               Approve Entries
           </button>
     </center>
+% endif
 
 <h2>Unapproved Entries</h2>
 <table class="table table-bordered table-striped table-condensed">

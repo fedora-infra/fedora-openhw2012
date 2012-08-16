@@ -195,13 +195,18 @@ def accept(request):
 
 @view_config(route_name='save_address', request_method='POST')
 def save_address(request):
-    username = request.params['username']
+    username = request.params['username'].lower()
     try:
         login(username, request.params['password'])
     except Exception, e:
         log.warn(str(e))
-        request.session.flash('Error: Either your Fedora username or password was incorrect, so we couldn\'t verify your account. Double-check your username, and try typing your password again.')
-        return HTTPFound(route_url('accept', request))
+        try:
+            username = username.lower()
+            login(username, request.params['password'])
+        except Exception, e:
+            log.warn(str(e))
+            request.session.flash('Error: Either your Fedora username or password was incorrect, so we couldn\'t verify your account. Double-check your username, and try typing your password again.')
+            return HTTPFound(route_url('accept', request))
 
     app = DBSession.query(Application).filter_by(username=username).first()
     if not app:

@@ -330,7 +330,7 @@
 % if winners:
     <table class="table table-bordered table-condensed">
     % for winner in winners:
-        <tr><td>${winner.realname}</td><td>${winner.hardware}</td></tr>
+        <tr><td>${winner.realname.decode('utf-8')}</td><td>${winner.hardware}</td></tr>
     % endfor
     </table>
 % else:

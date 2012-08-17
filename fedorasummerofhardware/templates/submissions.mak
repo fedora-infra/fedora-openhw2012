@@ -112,7 +112,7 @@
           </td>
           <td>${app.text.decode('utf-8')}</td>
           <td>${app.country}</td>
-          <td>${app.address}</td>
+          <td>${app.address and app.address.decode('utf-8') or app.address}</td>
         </tr>
     % endif
 % endfor

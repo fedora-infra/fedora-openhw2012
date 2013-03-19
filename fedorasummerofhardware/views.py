@@ -246,9 +246,8 @@ def save_address(request):
                       sender=sender, recipients=admins, body=body)
     DBSession.commit()
     mailer.send_immediately(message, fail_silently=False)
-    request.session.flash('Your address has been submitted. You should ' +
-            'receive your hardware within %s weeks.' %
-            request.registry.settings['est_shipping'])
+    request.session.flash('Your address has been submitted. You should receive your hardware within six to ten weeks.')
+    log.info('Address submitted for %s' % username)
     return HTTPFound(request.application_url)
 
 

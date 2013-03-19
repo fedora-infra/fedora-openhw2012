@@ -1,6 +1,8 @@
 Fedora Summer of Open Hardware 2012
 ===================================
 
+.. image:: http://lewk.org/img/openhw2012.png
+
 Authors
 -------
 

@@ -221,12 +221,24 @@ def save_address(request):
     mailer = get_mailer(request)
     admins = request.registry.settings['admin_email'].split()
     sender = request.registry.settings['email_from']
-    body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
-            "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
-            "Date Submitted: %s\nAddress: %s") % (
-                   app.realname, app.username, app.country, app.state,
-                   app.phone, app.hardware, app.shield, app.date,
-                   app.address)
+    print(repr(app.address))
+    try:
+        body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
+                "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
+                "Date Submitted: %s\nAddress: %s") % (
+                       app.realname.encode('utf-8'), app.username, app.country, app.state,
+                       app.phone, app.hardware, app.shield, app.date,
+                       app.address.encode('utf-8'))
+    except Exception, e:
+        from kitchen.text.converters import to_unicode, to_bytes
+        log.warn(str(e))
+        body = ("Real Name: %s\nUsername: %s\nCountry: %s\nState: %s\n" +
+                "Date of Birth: %s\nHardware: %s\nShield: %s\n" +
+                "Date Submitted: %s\nAddress: %s") % (
+                       app.realname.decode('utf-8'), app.username, app.country, app.state,
+                       app.phone, app.hardware, app.shield, app.date,
+                       app.address)
+
     prefix = "[Fedora Summer of Open Hardware]"
     if updated:
         prefix += "[UPDATED]"
